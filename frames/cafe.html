@@ -52,9 +52,9 @@
 
     /* Top Portfolio Return Banner */
     .top-portfolio-bar {
-      background: rgba(10, 5, 3, 0.92);
-      border-bottom: 1px solid rgba(230, 161, 92, 0.15);
-      padding: 9px 6vw;
+      background: rgba(10, 5, 3, 0.95);
+      border-bottom: 1px solid rgba(230, 161, 92, 0.18);
+      padding: 10px 6vw;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,7 +62,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
-      z-index: 110;
+      z-index: 120;
       position: relative;
     }
 
@@ -73,11 +73,39 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .top-portfolio-bar a:hover {
       color: #fff;
+      transform: translateX(-2px);
+    }
+
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(74, 93, 78, 0.3);
+      border: 1px solid rgba(74, 93, 78, 0.6);
+      font-size: 0.7rem;
+      color: #a7e4b2;
+      letter-spacing: 0.08em;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     /* Sticky Navigation */
@@ -86,13 +114,13 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 18px 6vw;
+      padding: 16px 6vw;
       display: flex;
       justify-content: space-between;
       align-items: center;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(18, 11, 8, 0.85);
+      background: rgba(18, 11, 8, 0.88);
       border-bottom: 1px solid var(--border-warm);
       z-index: 100;
     }
@@ -123,7 +151,7 @@
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 26px;
     }
 
     .nav-link {
@@ -141,6 +169,48 @@
       color: var(--amber-warm);
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-nav-cart {
+      background: rgba(28, 17, 13, 0.85);
+      border: 1px solid var(--border-warm);
+      color: var(--cream);
+      font-size: 0.78rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      transition: all 0.25s ease;
+    }
+
+    .btn-nav-cart:hover {
+      border-color: var(--amber-warm);
+      background: rgba(230, 161, 92, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .cart-badge {
+      background: var(--amber-warm);
+      color: #120b08;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .btn-reserve {
       background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
       color: #120b08;
@@ -148,7 +218,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       font-weight: 700;
-      padding: 10px 22px;
+      padding: 9px 20px;
       border-radius: 999px;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -170,7 +240,7 @@
 
     /* Hero Section */
     .hero-section {
-      min-height: 88vh;
+      min-height: 85vh;
       display: grid;
       grid-template-columns: 1.15fr 1fr;
       align-items: center;
@@ -246,6 +316,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-primary:hover {
@@ -266,6 +338,9 @@
       text-decoration: none;
       transition: all 0.3s ease;
       background: rgba(230, 161, 92, 0.05);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-outline:hover {
@@ -352,7 +427,7 @@
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-warm);
       border-radius: 24px;
-      margin: 40px 0 100px;
+      margin: 40px 0 90px;
     }
 
     .highlight-item {
@@ -390,7 +465,7 @@
     .section-head {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto 50px;
+      margin: 0 auto 40px;
     }
 
     .section-eyebrow {
@@ -417,9 +492,61 @@
       line-height: 1.7;
     }
 
+    /* Mood Recommendation Quiz Widget */
+    .mood-quiz-box {
+      background: rgba(28, 17, 13, 0.75);
+      border: 1px solid var(--border-warm);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .mood-quiz-title {
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      font-weight: 600;
+    }
+
+    .mood-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mood-pill {
+      background: rgba(18, 11, 8, 0.7);
+      border: 1px solid rgba(230, 161, 92, 0.25);
+      color: var(--cream);
+      padding: 7px 18px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mood-pill:hover,
+    .mood-pill.active {
+      border-color: var(--amber-warm);
+      background: var(--amber-warm);
+      color: #120b08;
+      font-weight: 600;
+      transform: translateY(-2px);
+    }
+
     /* About Section */
     .about-section {
-      padding: 60px 0 120px;
+      padding: 50px 0 100px;
     }
 
     .about-grid {
@@ -515,7 +642,7 @@
 
     /* Menu Section */
     .menu-section {
-      padding: 60px 0 120px;
+      padding: 50px 0 100px;
       position: relative;
     }
 
@@ -524,7 +651,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     .menu-tab-btn {
@@ -563,8 +690,9 @@
       border-radius: 20px;
       padding: 24px;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       transition: all 0.3s ease;
       position: relative;
     }
@@ -576,11 +704,21 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     }
 
+    .menu-item-card.highlighted {
+      border-color: var(--amber-warm);
+      box-shadow: 0 0 25px rgba(230, 161, 92, 0.6);
+      animation: pulseHighlight 1.5s ease-in-out;
+    }
+
+    @keyframes pulseHighlight {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
     .item-info {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      flex: 1;
     }
 
     .item-head {
@@ -608,14 +746,6 @@
       font-weight: 700;
     }
 
-    .item-price {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--amber-warm);
-      white-space: nowrap;
-    }
-
     .item-desc {
       font-size: 0.84rem;
       color: var(--text-muted);
@@ -637,9 +767,51 @@
       border-radius: 6px;
     }
 
+    .item-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(230, 161, 92, 0.12);
+      padding-top: 14px;
+      margin-top: 6px;
+    }
+
+    .item-price {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--amber-warm);
+      white-space: nowrap;
+    }
+
+    .btn-add-order {
+      background: rgba(230, 161, 92, 0.12);
+      border: 1px solid rgba(230, 161, 92, 0.4);
+      color: var(--amber-warm);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+    }
+
+    .btn-add-order:hover {
+      background: var(--amber-warm);
+      color: #120b08;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(230, 161, 92, 0.35);
+    }
+
     /* Ambience & Gallery Section */
     .gallery-section {
-      padding: 60px 0 120px;
+      padding: 50px 0 100px;
     }
 
     .gallery-masonry {
@@ -654,7 +826,7 @@
       overflow: hidden;
       border: 1px solid var(--border-warm);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
-      height: 380px;
+      height: 360px;
       cursor: pointer;
     }
 
@@ -698,25 +870,123 @@
       font-family: var(--font-serif);
       font-size: 1.35rem;
       color: #ffffff;
-      margin-top: 2px;
+      margin-top: 4px;
+    }
+
+    /* Guest Reviews Section */
+    .reviews-section {
+      padding: 50px 0 100px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: 20px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .review-card:hover {
+      border-color: var(--amber-warm);
+      transform: translateY(-3px);
+    }
+
+    .review-stars {
+      color: var(--amber-warm);
+      letter-spacing: 3px;
+      font-size: 1rem;
+    }
+
+    .review-text {
+      font-size: 0.88rem;
+      color: var(--cream-soft);
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .reviewer-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid rgba(230, 161, 92, 0.1);
+      padding-top: 14px;
+    }
+
+    .reviewer-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(230, 161, 92, 0.2);
+      border: 1px solid var(--amber-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--amber-warm);
+      font-size: 0.85rem;
+    }
+
+    .reviewer-name {
+      font-size: 0.84rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .reviewer-tag {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .leave-review-card {
+      background: rgba(28, 17, 13, 0.6);
+      border: 1px dashed var(--border-warm);
+      border-radius: 20px;
+      padding: 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .leave-review-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .leave-review-info p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-top: 3px;
     }
 
     /* Contact & Reservation Section */
     .reservation-section {
-      padding: 60px 0 120px;
+      padding: 50px 0 120px;
     }
 
     .booking-card {
-      background: linear-gradient(135deg, rgba(38, 22, 16, 0.9) 0%, rgba(20, 11, 8, 0.95) 100%);
+      background: var(--bg-card);
       border: 1px solid var(--border-warm);
       border-radius: 28px;
-      padding: 50px;
+      padding: 48px;
       display: grid;
-      grid-template-columns: 1fr 1.25fr;
+      grid-template-columns: 1fr 1.15fr;
       gap: 50px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
     }
 
     .booking-info {
@@ -728,14 +998,15 @@
 
     .booking-info h3 {
       font-family: var(--font-serif);
-      font-size: 2.4rem;
-      color: #fff;
-      line-height: 1.15;
+      font-size: 2.1rem;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-top: 8px;
     }
 
     .booking-info p {
-      color: var(--text-muted);
       font-size: 0.92rem;
+      color: var(--text-muted);
       line-height: 1.7;
     }
 
@@ -747,23 +1018,28 @@
 
     .info-row {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 14px;
-      color: var(--cream-soft);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
     }
 
     .info-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(230, 161, 92, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 1.1rem;
       color: var(--amber-warm);
-      font-size: 1rem;
-      flex-shrink: 0;
+      min-width: 24px;
+    }
+
+    .info-row strong {
+      display: block;
+      color: #fff;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .info-row div {
+      color: var(--cream-soft);
+      font-size: 0.85rem;
     }
 
     .booking-form {
@@ -785,80 +1061,489 @@
     }
 
     .form-field label {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--amber-warm);
+      color: var(--cream-soft);
       font-weight: 600;
     }
 
     .form-field input,
     .form-field select,
     .form-field textarea {
-      background: rgba(14, 8, 6, 0.8);
+      background: rgba(18, 11, 8, 0.75);
       border: 1px solid var(--border-warm);
       border-radius: 12px;
-      padding: 13px 16px;
-      color: #fff;
+      padding: 12px 14px;
+      color: var(--cream);
       font-family: var(--font-sans);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       outline: none;
-      transition: all 0.25s ease;
+      transition: border-color 0.25s ease;
     }
 
     .form-field input:focus,
     .form-field select:focus,
     .form-field textarea:focus {
       border-color: var(--amber-warm);
-      box-shadow: 0 0 15px rgba(230, 161, 92, 0.25);
-      background: rgba(24, 14, 10, 0.95);
+      box-shadow: 0 0 12px rgba(230, 161, 92, 0.25);
     }
 
     .btn-submit-booking {
       background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
       color: #120b08;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
       font-size: 0.82rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       font-weight: 700;
-      padding: 16px;
-      border-radius: 999px;
-      border: none;
       cursor: pointer;
-      margin-top: 10px;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      margin-top: 6px;
+      font-family: var(--font-sans);
     }
 
     .btn-submit-booking:hover {
       background: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(230, 161, 92, 0.4);
+      box-shadow: 0 8px 24px rgba(230, 161, 92, 0.45);
     }
 
-    .booking-success-message {
+    /* Active Reservation Card in UI */
+    .active-reservation-card {
+      background: rgba(74, 93, 78, 0.2);
+      border: 1px solid rgba(74, 93, 78, 0.6);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin-top: 14px;
       display: none;
-      background: rgba(40, 85, 50, 0.5);
-      border: 1px solid rgba(110, 225, 140, 0.4);
-      color: #bbf7d0;
-      border-radius: 14px;
-      padding: 18px;
+    }
+
+    .active-res-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.76rem;
+      color: #a7e4b2;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .active-res-details {
+      font-size: 0.84rem;
+      color: var(--cream);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* Sliding Cart Drawer */
+    .cart-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cart-drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -460px;
+      width: 440px;
+      max-width: 90vw;
+      height: 100vh;
+      background: #180f0b;
+      border-left: 1px solid var(--border-warm);
+      box-shadow: -15px 0 50px rgba(0, 0, 0, 0.8);
+      z-index: 210;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--border-warm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close-cart {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .btn-close-cart:hover {
+      color: #fff;
+    }
+
+    .cart-items-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cart-empty-message {
       text-align: center;
-      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(28, 17, 13, 0.7);
+      border: 1px solid rgba(230, 161, 92, 0.15);
+      border-radius: 14px;
+      padding: 12px 14px;
+      gap: 12px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .cart-item-price {
+      font-size: 0.78rem;
+      color: var(--amber-warm);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .cart-qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-qty {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: rgba(230, 161, 92, 0.15);
+      border: 1px solid rgba(230, 161, 92, 0.3);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .btn-qty:hover {
+      background: var(--amber-warm);
+      color: #120b08;
+    }
+
+    .cart-qty-val {
+      font-size: 0.82rem;
+      font-weight: 700;
+      min-width: 16px;
+      text-align: center;
+    }
+
+    .cart-footer {
+      padding: 22px 26px;
+      border-top: 1px solid var(--border-warm);
+      background: rgba(18, 11, 8, 0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-order-type {
+      display: flex;
+      background: rgba(28, 17, 13, 0.8);
+      border: 1px solid var(--border-warm);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .type-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--cream-soft);
+      padding: 6px 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+    }
+
+    .type-btn.active {
+      background: var(--amber-warm);
+      color: #120b08;
+    }
+
+    .cart-totals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.82rem;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+    }
+
+    .cart-total-row.grand {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      border-top: 1px dashed rgba(230, 161, 92, 0.25);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .cart-total-row.grand span:last-child {
+      color: var(--amber-warm);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+    }
+
+    .btn-checkout {
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      border: none;
+      padding: 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+    }
+
+    .btn-checkout:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 161, 92, 0.4);
+    }
+
+    /* Floating Order Bar on Mobile / Desktop */
+    .floating-cart-pill {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(230, 161, 92, 0.4);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 150;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .floating-cart-pill:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(230, 161, 92, 0.6);
+    }
+
+    /* Modal Windows */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #1a100c;
+      border: 1px solid var(--border-warm);
+      border-radius: 24px;
+      max-width: 500px;
+      width: 100%;
+      padding: 36px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      position: relative;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-icon-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(230, 161, 92, 0.15);
+      border: 1px solid var(--amber-warm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--amber-warm);
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    .modal-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .modal-receipt-card {
+      background: rgba(10, 5, 3, 0.6);
+      border: 1px dashed rgba(230, 161, 92, 0.3);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      text-align: left;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-receipt-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--cream-soft);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
       margin-top: 10px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      z-index: 400;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast-msg {
+      background: rgba(26, 16, 12, 0.95);
+      border: 1px solid var(--amber-warm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideInToast 0.3s forwards, fadeOutToast 0.3s 2.7s forwards;
+    }
+
+    @keyframes slideInToast {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeOutToast {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
     }
 
     /* Footer */
     .site-footer {
+      background: rgba(10, 5, 3, 0.96);
       border-top: 1px solid var(--border-warm);
-      background: rgba(12, 6, 4, 0.95);
-      padding: 40px 6vw 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+      padding: 40px 6vw 30px;
     }
 
     .footer-top {
@@ -867,27 +1552,29 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(230, 161, 92, 0.12);
     }
 
     .footer-brand h4 {
       font-family: var(--font-serif);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       color: var(--amber-warm);
-      letter-spacing: 0.12em;
     }
 
     .footer-links {
       display: flex;
-      gap: 28px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
-      color: var(--text-muted);
+      color: var(--cream-soft);
       text-decoration: none;
-      font-size: 0.76rem;
-      letter-spacing: 0.15em;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: color 0.2s ease;
+      transition: color 0.2s;
     }
 
     .footer-links a:hover {
@@ -895,15 +1582,14 @@
     }
 
     .footer-bottom {
-      border-top: 1px solid rgba(230, 161, 92, 0.1);
-      padding-top: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
       flex-wrap: wrap;
       gap: 12px;
+      padding-top: 20px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
     }
 
     .portfolio-credit {
@@ -920,65 +1606,53 @@
     @media (max-width: 992px) {
       .hero-section {
         grid-template-columns: 1fr;
-        text-align: center;
+        padding: 40px 0;
       }
-
-      .hero-content {
-        align-items: center;
-      }
-
-      .hero-desc {
-        margin: 0 auto;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
       .highlights-strip {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
       }
-
-      .highlight-item {
-        border-left: none;
-      }
-
       .about-grid {
         grid-template-columns: 1fr;
       }
-
-      .about-images-collage {
-        order: 2;
+      .about-img-box.tall {
+        height: 360px;
+        margin-top: 0;
       }
-
       .menu-grid {
         grid-template-columns: 1fr;
       }
-
       .gallery-masonry {
         grid-template-columns: 1fr;
       }
-
       .gallery-item.span-2 {
         grid-column: span 1;
       }
-
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
       .booking-card {
         grid-template-columns: 1fr;
+        padding: 30px;
       }
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 14px 5vw;
+      }
       .nav-menu {
         display: none;
       }
-
-      .form-grid-2 {
-        grid-template-columns: 1fr;
-      }
-
       .highlights-strip {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .highlight-item {
+        border-left: none;
+        border-bottom: 1px solid rgba(230, 161, 92, 0.15);
+        padding-bottom: 12px;
+      }
+      .form-grid-2 {
         grid-template-columns: 1fr;
       }
     }
@@ -986,26 +1660,41 @@
 </head>
 <body>
 
-  <!-- Top Portfolio Indicator -->
-  <aside class="top-portfolio-bar">
-    <span>Web Development Showcase Project</span>
-    <a href="index.html">← Back to Rukhsar's Portfolio</a>
-  </aside>
+  <!-- Top Return to Portfolio Bar -->
+  <div class="top-portfolio-bar">
+    <a href="index.html">
+      <span>←</span>
+      <span>Back to Rukhsar's Portfolio</span>
+    </a>
+    <div class="live-status-pill" id="liveStatusBadge">
+      <span class="status-dot"></span>
+      <span id="liveStatusText">OPEN NOW • Closes 11:00 PM</span>
+    </div>
+  </div>
 
-  <!-- Navigation -->
+  <!-- Sticky Navbar -->
   <header class="navbar">
     <a href="#home" class="brand">
       <span class="brand-title">Brew & Co.</span>
       <span class="brand-sub">Artisanal Coffee & Roastery</span>
     </a>
+
     <nav class="nav-menu">
       <a href="#home" class="nav-link active">Home</a>
       <a href="#about" class="nav-link">About Us</a>
       <a href="#menu" class="nav-link">Menu</a>
       <a href="#ambience" class="nav-link">Ambience</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#contact" class="nav-link">Reserve</a>
     </nav>
-    <a href="#contact" class="btn-reserve">Book a Table</a>
+
+    <div class="nav-actions">
+      <button class="btn-nav-cart" onclick="toggleCartDrawer()" title="View Order">
+        <span>🛒 Order</span>
+        <span class="cart-badge" id="navCartCount">0</span>
+      </button>
+      <a href="#contact" class="btn-reserve">Book Table</a>
+    </div>
   </header>
 
   <main class="container">
@@ -1025,6 +1714,9 @@
             <span>Explore Menu</span>
             <span>→</span>
           </a>
+          <button class="btn-outline" onclick="toggleCartDrawer()">
+            <span>Order Online (Takeaway)</span>
+          </button>
           <a href="#contact" class="btn-outline">
             <span>Reserve Table</span>
           </a>
@@ -1123,8 +1815,21 @@
         <span class="section-eyebrow">TASTE THE CRAFT</span>
         <h2 class="section-title">Artisan Coffee & Kitchen Menu</h2>
         <p class="section-sub">
-          Handcrafted with single-origin beans, organic dairy alternatives, and locally sourced ingredients.
+          Handcrafted with single-origin beans, organic dairy alternatives, and locally sourced ingredients. Add items to order directly!
         </p>
+      </div>
+
+      <!-- Interactive Mood Recommendation Filter -->
+      <div class="mood-quiz-box">
+        <span class="mood-quiz-title">✨ What are you in the mood for?</span>
+        <div class="mood-pill-list">
+          <button class="mood-pill active" onclick="filterByMood('all', this)">☕ View All</button>
+          <button class="mood-pill" onclick="filterByMood('strong', this)">⚡ Strong & Bold</button>
+          <button class="mood-pill" onclick="filterByMood('sweet', this)">🍯 Sweet & Creamy</button>
+          <button class="mood-pill" onclick="filterByMood('cold', this)">❄️ Cold & Crisp</button>
+          <button class="mood-pill" onclick="filterByMood('tea', this)">🌿 Caffeine-Light & Teas</button>
+          <button class="mood-pill" onclick="filterByMood('pastry', this)">🥐 Bakery Pairings</button>
+        </div>
       </div>
 
       <!-- Menu Category Tabs -->
@@ -1137,10 +1842,10 @@
       </div>
 
       <!-- Menu Grid -->
-      <div class="menu-grid">
+      <div class="menu-grid" id="menuGrid">
 
         <!-- Item 1 -->
-        <article class="menu-item-card" data-category="espresso">
+        <article class="menu-item-card" data-category="espresso" data-mood="sweet">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Salted Caramel Cloud Latte</h3>
@@ -1152,11 +1857,16 @@
               <span class="item-tag">House Specialty</span>
             </div>
           </div>
-          <span class="item-price">₹280</span>
+          <div class="item-foot">
+            <span class="item-price">₹280</span>
+            <button class="btn-add-order" onclick="addToCart('Salted Caramel Cloud Latte', 280)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 2 -->
-        <article class="menu-item-card" data-category="espresso">
+        <article class="menu-item-card" data-category="espresso" data-mood="strong">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Spanish Cortado</h3>
@@ -1167,11 +1877,16 @@
               <span class="item-tag">Traditional</span>
             </div>
           </div>
-          <span class="item-price">₹220</span>
+          <div class="item-foot">
+            <span class="item-price">₹220</span>
+            <button class="btn-add-order" onclick="addToCart('Spanish Cortado', 220)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 3 -->
-        <article class="menu-item-card" data-category="brews">
+        <article class="menu-item-card" data-category="brews" data-mood="strong cold">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">16-Hour Nitro Cold Brew</h3>
@@ -1183,11 +1898,16 @@
               <span class="item-tag">Velvety Smooth</span>
             </div>
           </div>
-          <span class="item-price">₹260</span>
+          <div class="item-foot">
+            <span class="item-price">₹260</span>
+            <button class="btn-add-order" onclick="addToCart('16-Hour Nitro Cold Brew', 260)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 4 -->
-        <article class="menu-item-card" data-category="brews">
+        <article class="menu-item-card" data-category="brews" data-mood="cold">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Espresso Tonic & Rosemary</h3>
@@ -1198,11 +1918,16 @@
               <span class="item-tag">Citrus Notes</span>
             </div>
           </div>
-          <span class="item-price">₹250</span>
+          <div class="item-foot">
+            <span class="item-price">₹250</span>
+            <button class="btn-add-order" onclick="addToCart('Espresso Tonic & Rosemary', 250)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 5 -->
-        <article class="menu-item-card" data-category="tea">
+        <article class="menu-item-card" data-category="tea" data-mood="tea">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Kyoto Ceremonial Matcha</h3>
@@ -1214,11 +1939,16 @@
               <span class="item-tag">Vegan</span>
             </div>
           </div>
-          <span class="item-price">₹290</span>
+          <div class="item-foot">
+            <span class="item-price">₹290</span>
+            <button class="btn-add-order" onclick="addToCart('Kyoto Ceremonial Matcha', 290)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 6 -->
-        <article class="menu-item-card" data-category="tea">
+        <article class="menu-item-card" data-category="tea" data-mood="tea">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Spiced Kashmiri Kahwa</h3>
@@ -1229,11 +1959,16 @@
               <span class="item-tag">Heritage</span>
             </div>
           </div>
-          <span class="item-price">₹210</span>
+          <div class="item-foot">
+            <span class="item-price">₹210</span>
+            <button class="btn-add-order" onclick="addToCart('Spiced Kashmiri Kahwa', 210)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 7 -->
-        <article class="menu-item-card" data-category="bakery">
+        <article class="menu-item-card" data-category="bakery" data-mood="pastry">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Almond Butter Croissant</h3>
@@ -1245,11 +1980,16 @@
               <span class="item-tag">Chef Favorite</span>
             </div>
           </div>
-          <span class="item-price">₹240</span>
+          <div class="item-foot">
+            <span class="item-price">₹240</span>
+            <button class="btn-add-order" onclick="addToCart('Almond Butter Croissant', 240)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
         <!-- Item 8 -->
-        <article class="menu-item-card" data-category="bakery">
+        <article class="menu-item-card" data-category="bakery" data-mood="sweet pastry">
           <div class="item-info">
             <div class="item-head">
               <h3 class="item-title">Dark Belgian Tiramisu</h3>
@@ -1260,7 +2000,12 @@
               <span class="item-tag">Single Origin Espresso</span>
             </div>
           </div>
-          <span class="item-price">₹310</span>
+          <div class="item-foot">
+            <span class="item-price">₹310</span>
+            <button class="btn-add-order" onclick="addToCart('Dark Belgian Tiramisu', 310)">
+              <span>+ Add to Order</span>
+            </button>
+          </div>
         </article>
 
       </div>
@@ -1324,7 +2069,65 @@
       </div>
     </section>
 
-    <!-- 5. CONTACT & RESERVATION -->
+    <!-- 5. GUEST REVIEWS SECTION -->
+    <section class="reviews-section" id="reviews">
+      <div class="section-head">
+        <span class="section-eyebrow">COMMUNITY VOICES</span>
+        <h2 class="section-title">Kind Words From Our Guests</h2>
+        <p class="section-sub">Real stories from people who make Brew & Co. their second home.</p>
+      </div>
+
+      <div class="reviews-grid" id="reviewsGrid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The Salted Caramel Cloud Latte is by far the finest coffee in Nagpur. The natural greenery and calm jazz make it my absolute go-to for remote work."</p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">A</div>
+            <div>
+              <div class="reviewer-name">Ananya Deshmukh</div>
+              <div class="reviewer-tag">Architect & Regular</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The Almond Butter Croissant paired with the 16-Hour Nitro Cold Brew was perfection. Flaky, buttery, and the coffee has zero bitterness. Exceptional baristas!"</p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">R</div>
+            <div>
+              <div class="reviewer-name">Rohan Mehta</div>
+              <div class="reviewer-tag">Product Designer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Booked a booth for an anniversary evening coffee date. The warm lighting and ambient music were sublime. Easy booking process and wonderful staff!"</p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">S</div>
+            <div>
+              <div class="reviewer-name">Sarah & Kabir</div>
+              <div class="reviewer-tag">Coffee Enthusiasts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Review Widget -->
+      <div class="leave-review-card">
+        <div class="leave-review-info">
+          <h4>Visited Brew & Co. recently?</h4>
+          <p>Share your experience or rating with our barista team.</p>
+        </div>
+        <button class="btn-outline" onclick="openReviewModal()">
+          <span>Write a Review ✍️</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 6. CONTACT & RESERVATION -->
     <section class="reservation-section" id="contact">
       <div class="booking-card">
         <div class="booking-info">
@@ -1366,10 +2169,19 @@
               </div>
             </div>
           </div>
+
+          <!-- Active Reservation Status Banner -->
+          <div class="active-reservation-card" id="activeReservationBanner">
+            <div class="active-res-head">
+              <span>✓ Active Reservation</span>
+              <button onclick="cancelActiveReservation()" style="background:none; border:none; color:#f87171; cursor:pointer; font-size:0.75rem;">Cancel</button>
+            </div>
+            <div class="active-res-details" id="activeResText"></div>
+          </div>
         </div>
 
         <!-- Interactive Reservation Form -->
-        <form class="booking-form" onsubmit="handleReservation(event)">
+        <form class="booking-form" id="bookingForm" onsubmit="handleReservation(event)">
           <div class="form-grid-2">
             <div class="form-field">
               <label for="bookName">Full Name *</label>
@@ -1400,34 +2212,154 @@
           </div>
 
           <div class="form-field">
-            <label for="bookGuests">Number of Guests *</label>
+            <label for="bookGuests">Number of Guests & Seating Preference *</label>
             <select id="bookGuests" required>
-              <option value="1">1 Person (Quiet Work Table)</option>
-              <option value="2" selected>2 People (Cozy Booth)</option>
-              <option value="3-4">3 - 4 People (Round Table)</option>
-              <option value="5+">5+ People (Community Seating)</option>
+              <option value="1 Person (Quiet Work Table)">1 Person (Quiet Work Table with Power Outlets)</option>
+              <option value="2 People (Cozy Velvet Booth)" selected>2 People (Cozy Velvet Booth)</option>
+              <option value="3 - 4 People (Garden Arch Window)">3 - 4 People (Garden Arch Window Table)</option>
+              <option value="5+ People (Community Wooden Table)">5+ People (Community Wooden Table)</option>
             </select>
           </div>
 
           <div class="form-field">
-            <label for="bookNote">Special Requests / Seating Preference</label>
-            <textarea id="bookNote" rows="2" placeholder="e.g. Garden window booth, anniversary, almond milk preference..."></textarea>
+            <label for="bookNote">Special Requests (Optional)</label>
+            <textarea id="bookNote" rows="2" placeholder="e.g. Anniversary celebration, quiet reading area, oat milk preference..."></textarea>
           </div>
 
           <button type="submit" class="btn-submit-booking">
             <span>Confirm Reservation</span>
             <span>→</span>
           </button>
-
-          <div class="booking-success-message" id="bookingSuccess">
-            <strong>✓ Table Reserved!</strong>
-            <div>Your table request has been received. A confirmation SMS/WhatsApp will be sent to your number shortly. See you at Brew & Co.!</div>
-          </div>
         </form>
       </div>
     </section>
 
   </main>
+
+  <!-- Slide-Over Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay" onclick="toggleCartDrawer()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3><span>☕</span> Your Coffee Order</h3>
+      <button class="btn-close-cart" onclick="toggleCartDrawer()">✕</button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Items dynamically populated -->
+      <div class="cart-empty-message">Your order is empty.<br>Add handcrafted brews or bakery items from the menu!</div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-order-type">
+        <button class="type-btn active" onclick="setOrderType('takeaway', this)">🥡 Takeaway</button>
+        <button class="type-btn" onclick="setOrderType('dine-in', this)">🍽️ Dine-In</button>
+        <button class="type-btn" onclick="setOrderType('delivery', this)">🛵 Delivery</button>
+      </div>
+
+      <div class="cart-totals-list">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Taxes & GST (5%)</span>
+          <span id="cartTax">₹0</span>
+        </div>
+        <div class="cart-total-row grand">
+          <span>Grand Total</span>
+          <span id="cartGrandTotal">₹0</span>
+        </div>
+      </div>
+
+      <button class="btn-checkout" onclick="openCheckoutModal()">
+        <span>Place Order Now</span>
+        <span>→</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Floating Cart Button -->
+  <div class="floating-cart-pill" id="floatingCartBtn" onclick="toggleCartDrawer()">
+    <span>🛒</span>
+    <span id="floatingCartText">View Order (0) • ₹0</span>
+  </div>
+
+  <!-- Reservation Confirmation Modal -->
+  <div class="modal-overlay" id="resModal">
+    <div class="modal-box">
+      <div class="modal-icon-badge">✓</div>
+      <h3 class="modal-title">Table Confirmed!</h3>
+      <p class="modal-sub">We have reserved your table at Brew & Co. An SMS confirmation will be sent shortly.</p>
+
+      <div class="modal-receipt-card" id="resModalDetails">
+        <!-- Details injected via JS -->
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="closeResModal()">
+          <span>Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Receipt Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+      <div class="modal-icon-badge">☕</div>
+      <h3 class="modal-title">Order Received!</h3>
+      <p class="modal-sub">Our baristas are preparing your handcrafted order with care.</p>
+
+      <div class="modal-receipt-card" id="orderModalDetails">
+        <!-- Details injected via JS -->
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="closeOrderModal()">
+          <span>Awesome!</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Write Review Modal -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-box" style="text-align: left;">
+      <h3 class="modal-title" style="text-align: center;">Leave a Review</h3>
+      <p class="modal-sub" style="text-align: center; margin-bottom: 18px;">How was your coffee & ambience experience?</p>
+
+      <form onsubmit="handleReviewSubmit(event)" style="display:flex; flex-direction:column; gap:14px;">
+        <div class="form-field">
+          <label>Your Name *</label>
+          <input type="text" id="revName" placeholder="e.g. Priya Sharma" required />
+        </div>
+        <div class="form-field">
+          <label>Role / Tagline</label>
+          <input type="text" id="revRole" placeholder="e.g. Freelance Developer / Coffee Lover" />
+        </div>
+        <div class="form-field">
+          <label>Rating *</label>
+          <select id="revStars" required>
+            <option value="5">★★★★★ (5/5 Exceptional)</option>
+            <option value="4">★★★★☆ (4/5 Great)</option>
+            <option value="3">★★★☆☆ (3/5 Good)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Your Review *</label>
+          <textarea id="revComment" rows="3" placeholder="Tell us what you loved about our coffee or space..." required></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-outline" onclick="closeReviewModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Post Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -1441,7 +2373,8 @@
         <a href="#about">About</a>
         <a href="#menu">Menu</a>
         <a href="#ambience">Ambience</a>
-        <a href="#contact">Contact</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Reserve</a>
         <a href="index.html">Developer Portfolio</a>
       </div>
     </div>
@@ -1456,7 +2389,34 @@
   </footer>
 
   <script>
-    // Menu Category Filter Logic
+    // -------------------------------------------------------------
+    // 1. LIVE OPEN / CLOSED BADGE
+    // -------------------------------------------------------------
+    function updateLiveStatus() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const badge = document.getElementById('liveStatusBadge');
+      const text = document.getElementById('liveStatusText');
+
+      // Open from 8:00 AM (8) to 11:00 PM (23)
+      if (currentHour >= 8 && currentHour < 23) {
+        text.innerText = 'OPEN NOW • Closes 11:00 PM';
+        badge.style.background = 'rgba(74, 93, 78, 0.3)';
+        badge.style.borderColor = 'rgba(74, 93, 78, 0.6)';
+        badge.style.color = '#a7e4b2';
+      } else {
+        text.innerText = 'CURRENTLY CLOSED • Opens 8:00 AM';
+        badge.style.background = 'rgba(180, 50, 50, 0.2)';
+        badge.style.borderColor = 'rgba(180, 50, 50, 0.4)';
+        badge.style.color = '#fca5a5';
+      }
+    }
+    updateLiveStatus();
+    setInterval(updateLiveStatus, 60000);
+
+    // -------------------------------------------------------------
+    // 2. MENU CATEGORY & MOOD QUIZ FILTER LOGIC
+    // -------------------------------------------------------------
     const menuButtons = document.querySelectorAll('.menu-tab-btn');
     const menuCards = document.querySelectorAll('.menu-item-card');
 
@@ -1464,6 +2424,11 @@
       btn.addEventListener('click', () => {
         menuButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+
+        // Reset mood pills
+        document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('active'));
+        const allMoodPill = document.querySelector('.mood-pill');
+        if (allMoodPill) allMoodPill.classList.add('active');
 
         const category = btn.getAttribute('data-category');
 
@@ -1478,7 +2443,174 @@
       });
     });
 
-    // Handle Reservation Submission
+    function filterByMood(mood, elem) {
+      document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('active'));
+      elem.classList.add('active');
+
+      // Reset main category buttons to 'all'
+      menuButtons.forEach(b => b.classList.remove('active'));
+      const allTab = document.querySelector('.menu-tab-btn[data-category="all"]');
+      if (allTab) allTab.classList.add('active');
+
+      menuCards.forEach(card => {
+        const itemMood = card.getAttribute('data-mood') || '';
+        if (mood === 'all' || itemMood.includes(mood)) {
+          card.style.display = 'flex';
+          card.classList.add('highlighted');
+          setTimeout(() => card.classList.remove('highlighted'), 1200);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Smooth scroll to menu grid
+      document.getElementById('menuGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // -------------------------------------------------------------
+    // 3. TOAST SYSTEM
+    // -------------------------------------------------------------
+    function showToast(message, icon = '☕') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast-msg';
+      toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 3000);
+    }
+
+    // -------------------------------------------------------------
+    // 4. INTERACTIVE CART & CHECKOUT ENGINE
+    // -------------------------------------------------------------
+    let cart = JSON.parse(localStorage.getItem('brew_cart') || '[]');
+    let currentOrderType = 'takeaway';
+
+    function saveCart() {
+      localStorage.setItem('brew_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function addToCart(name, price) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      saveCart();
+      showToast(`Added ${name} to order!`, '✨');
+    }
+
+    function updateCartQty(name, delta) {
+      const item = cart.find(i => i.name === name);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.name !== name);
+      }
+      saveCart();
+    }
+
+    function setOrderType(type, btn) {
+      currentOrderType = type;
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function toggleCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartOverlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const navCount = document.getElementById('navCartCount');
+      const floatingBtn = document.getElementById('floatingCartBtn');
+      const floatingText = document.getElementById('floatingCartText');
+
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const tax = Math.round(subtotal * 0.05);
+      const grandTotal = subtotal + tax;
+
+      navCount.innerText = totalCount;
+
+      if (totalCount > 0) {
+        floatingBtn.style.display = 'flex';
+        floatingText.innerText = `View Order (${totalCount}) • ₹${grandTotal}`;
+      } else {
+        floatingBtn.style.display = 'none';
+      }
+
+      document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
+      document.getElementById('cartTax').innerText = `₹${tax}`;
+      document.getElementById('cartGrandTotal').innerText = `₹${grandTotal}`;
+
+      if (cart.length === 0) {
+        list.innerHTML = `<div class="cart-empty-message">Your order is empty.<br>Add handcrafted brews or bakery items from the menu!</div>`;
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item-row">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">₹${item.price} each</div>
+          </div>
+          <div class="cart-qty-ctrl">
+            <button class="btn-qty" onclick="updateCartQty('${item.name}', -1)">-</button>
+            <span class="cart-qty-val">${item.qty}</span>
+            <button class="btn-qty" onclick="updateCartQty('${item.name}', 1)">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderCart();
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        showToast('Your order is empty! Add something delicious first.', '⚠️');
+        return;
+      }
+
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const grandTotal = subtotal + Math.round(subtotal * 0.05);
+      const orderId = 'BREW-' + Math.floor(1000 + Math.random() * 9000);
+
+      const itemsSummary = cart.map(i => `${i.qty}x ${i.name}`).join(', ');
+
+      const details = document.getElementById('orderModalDetails');
+      details.innerHTML = `
+        <div class="modal-receipt-row"><strong>Order ID:</strong> <span>#${orderId}</span></div>
+        <div class="modal-receipt-row"><strong>Type:</strong> <span style="text-transform:capitalize;">${currentOrderType}</span></div>
+        <div class="modal-receipt-row"><strong>Items:</strong> <span>${itemsSummary}</span></div>
+        <div class="modal-receipt-row"><strong>Total Amount:</strong> <span style="color:var(--amber-warm); font-weight:700;">₹${grandTotal}</span></div>
+        <div class="modal-receipt-row"><strong>Estimated Prep:</strong> <span>12 - 15 minutes</span></div>
+        <div class="modal-receipt-row"><strong>Status:</strong> <span style="color:#4ade80;">Confirmed & Brewing ☕</span></div>
+      `;
+
+      toggleCartDrawer();
+      document.getElementById('orderModal').classList.add('open');
+
+      // Clear Cart
+      cart = [];
+      saveCart();
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').classList.remove('open');
+      showToast('Thank you! See you at Brew & Co.', '☕');
+    }
+
+    // -------------------------------------------------------------
+    // 5. TABLE RESERVATION WITH LOCAL STORAGE
+    // -------------------------------------------------------------
     function handleReservation(e) {
       e.preventDefault();
       const name = document.getElementById('bookName').value;
@@ -1486,22 +2618,109 @@
       const date = document.getElementById('bookDate').value;
       const time = document.getElementById('bookTime').value;
       const guests = document.getElementById('bookGuests').value;
+      const note = document.getElementById('bookNote').value;
+      const resCode = 'RES-' + Math.floor(1000 + Math.random() * 9000);
 
-      const successBox = document.getElementById('bookingSuccess');
-      successBox.style.display = 'block';
+      const resObj = { name, phone, date, time, guests, note, resCode };
+      localStorage.setItem('brew_reservation', JSON.stringify(resObj));
 
-      // Set today as minimum date
-      setTimeout(() => {
-        alert(`Reservation confirmed for ${name} (${guests} guests) on ${date} at ${time}. We look forward to welcoming you!`);
-      }, 500);
+      displayActiveReservation(resObj);
+
+      const modalDetails = document.getElementById('resModalDetails');
+      modalDetails.innerHTML = `
+        <div class="modal-receipt-row"><strong>Booking Code:</strong> <span>#${resCode}</span></div>
+        <div class="modal-receipt-row"><strong>Guest Name:</strong> <span>${name}</span></div>
+        <div class="modal-receipt-row"><strong>Date & Time:</strong> <span>${date} at ${time}</span></div>
+        <div class="modal-receipt-row"><strong>Table:</strong> <span>${guests}</span></div>
+        <div class="modal-receipt-row"><strong>Phone:</strong> <span>${phone}</span></div>
+        ${note ? `<div class="modal-receipt-row"><strong>Note:</strong> <span>${note}</span></div>` : ''}
+        <div class="modal-receipt-row"><strong>Status:</strong> <span style="color:#4ade80;">Confirmed ✓</span></div>
+      `;
+
+      document.getElementById('resModal').classList.add('open');
     }
 
-    // Set default reservation date to today
+    function closeResModal() {
+      document.getElementById('resModal').classList.remove('open');
+      showToast('Table reserved successfully! Looking forward to seeing you.', '🎉');
+    }
+
+    function displayActiveReservation(res) {
+      const banner = document.getElementById('activeReservationBanner');
+      const text = document.getElementById('activeResText');
+      if (res && res.resCode) {
+        banner.style.display = 'block';
+        text.innerHTML = `<strong>#${res.resCode}</strong> for <strong>${res.name}</strong> • ${res.guests} on <strong>${res.date} at ${res.time}</strong>.`;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    function cancelActiveReservation() {
+      if (confirm('Are you sure you want to cancel your upcoming reservation?')) {
+        localStorage.removeItem('brew_reservation');
+        displayActiveReservation(null);
+        showToast('Reservation has been cancelled.', 'ℹ️');
+      }
+    }
+
+    // Load active reservation on boot
+    const savedRes = JSON.parse(localStorage.getItem('brew_reservation') || 'null');
+    if (savedRes) {
+      displayActiveReservation(savedRes);
+    }
+
+    // Set today as min date
     const dateInput = document.getElementById('bookDate');
     if (dateInput) {
       const today = new Date().toISOString().split('T')[0];
       dateInput.min = today;
       dateInput.value = today;
+    }
+
+    // -------------------------------------------------------------
+    // 6. CUSTOMER REVIEWS SUBMISSION
+    // -------------------------------------------------------------
+    function openReviewModal() {
+      document.getElementById('reviewModal').classList.add('open');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('reviewModal').classList.remove('open');
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('revName').value;
+      const role = document.getElementById('revRole').value || 'Guest';
+      const starsNum = parseInt(document.getElementById('revStars').value, 10);
+      const comment = document.getElementById('revComment').value;
+      const starsStr = '★'.repeat(starsNum) + '☆'.repeat(5 - starsNum);
+
+      const grid = document.getElementById('reviewsGrid');
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card';
+      newCard.style.animation = 'pulseHighlight 1s ease-in-out';
+      newCard.innerHTML = `
+        <div class="review-stars">${starsStr}</div>
+        <p class="review-text">"${comment}"</p>
+        <div class="reviewer-meta">
+          <div class="reviewer-avatar">${name.charAt(0).toUpperCase()}</div>
+          <div>
+            <div class="reviewer-name">${name}</div>
+            <div class="reviewer-tag">${role} • Just Now</div>
+          </div>
+        </div>
+      `;
+
+      grid.prepend(newCard);
+      closeReviewModal();
+      showToast('Thank you for your review!', '🌟');
+
+      // Reset form
+      document.getElementById('revName').value = '';
+      document.getElementById('revRole').value = '';
+      document.getElementById('revComment').value = '';
     }
   </script>
 </body>
