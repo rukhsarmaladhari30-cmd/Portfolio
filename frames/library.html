@@ -1,0 +1,2726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Library Management System — Java Full Stack | Rukhsar Maladhari</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --bg-surface: #0f172a;
+      --bg-card: #131e36;
+      --bg-card-hover: #192744;
+      --navy-deep: #0b1528;
+      --navy-primary: #1e3a8a;
+      --navy-light: #2563eb;
+      --blue-accent: #38bdf8;
+      --blue-glow: rgba(56, 189, 248, 0.25);
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #ef4444;
+      --text-white: #ffffff;
+      --text-light: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-subtle: rgba(148, 163, 184, 0.15);
+      --border-active: rgba(56, 189, 248, 0.45);
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Cinzel', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Ambient blue glow background */
+    .ambient-glow-top {
+      position: fixed;
+      top: -150px;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-left {
+      position: fixed;
+      bottom: 10%;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Global Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(11, 21, 40, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #38bdf8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #fff;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Role Pill Switcher */
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(30, 58, 138, 0.4);
+      border: 1px solid var(--border-active);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .role-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+    }
+
+    .btn-role-switch {
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-light);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-role-switch:hover {
+      background: #334155;
+      border-color: var(--blue-accent);
+      color: #fff;
+    }
+
+    .btn-spring-api {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #fff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 7px 15px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-spring-api:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-back-portfolio {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-back-portfolio:hover {
+      color: #fff;
+    }
+
+    /* Layout Wrapper */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Sidebar Navigation */
+    .app-sidebar {
+      width: 260px;
+      background: rgba(11, 21, 40, 0.65);
+      border-right: 1px solid var(--border-subtle);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .nav-section-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-dim);
+      padding: 10px 14px 6px;
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      background: rgba(30, 41, 59, 0.6);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.22) 0%, rgba(56, 189, 248, 0.08) 100%);
+      color: #fff;
+      border-left: 3px solid var(--blue-accent);
+      font-weight: 600;
+    }
+
+    .nav-item .badge-count {
+      margin-left: auto;
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      color: var(--blue-accent);
+      font-family: var(--font-mono);
+    }
+
+    .sidebar-user-card {
+      background: rgba(19, 30, 54, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .user-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Main Content Area */
+    .app-main {
+      flex: 1;
+      padding: 28px 36px;
+      overflow-y: auto;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Section Headers */
+    .view-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .view-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .view-desc {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-top: 4px;
+    }
+
+    /* Action Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #fff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+      border-color: var(--blue-accent);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.7);
+      color: var(--text-light);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+      border-color: var(--blue-accent);
+    }
+
+    /* Stats Ribbon Cards */
+    .stats-ribbon {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-box-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0b1528;
+      border: 1px solid var(--border-subtle);
+      padding: 9px 16px;
+      border-radius: 10px;
+      flex: 1;
+      max-width: 480px;
+      transition: border-color 0.2s;
+    }
+
+    .search-box-wrapper:focus-within {
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.85rem;
+      width: 100%;
+      font-family: var(--font-main);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-pill {
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cat-pill:hover {
+      color: #fff;
+      border-color: var(--blue-accent);
+    }
+
+    .cat-pill.active {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      border-color: var(--blue-accent);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Books Grid */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .book-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-active);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .book-cover-container {
+      position: relative;
+      height: 220px;
+      background: #080d19;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .book-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .book-card:hover .book-cover-img {
+      transform: scale(1.05);
+    }
+
+    .book-badge-availability {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .badge-available {
+      background: rgba(16, 185, 129, 0.85);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+    }
+
+    .badge-unavailable {
+      background: rgba(239, 68, 68, 0.85);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    }
+
+    .book-category-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--blue-accent);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.66rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .book-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .book-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .book-card-author {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .book-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .book-meta-grid span strong {
+      color: var(--text-light);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+    }
+
+    .copies-meter {
+      margin-bottom: 16px;
+    }
+
+    .meter-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .meter-bar-bg {
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .meter-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .book-card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-card-action {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-borrow {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-borrow:hover:not(:disabled) {
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #0b1528;
+      font-weight: 700;
+    }
+
+    .btn-borrow:disabled {
+      background: #1e293b;
+      color: #64748b;
+      cursor: not-allowed;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-edit-admin {
+      background: #1e293b;
+      color: var(--text-light);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-edit-admin:hover {
+      background: #334155;
+      color: #fff;
+      border-color: var(--blue-accent);
+    }
+
+    .btn-delete-admin {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 9px;
+      width: 36px;
+      flex: 0 0 36px;
+    }
+
+    .btn-delete-admin:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Tables */
+    .data-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .data-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.82rem;
+    }
+
+    .data-table th {
+      background: #0b1528;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .data-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-light);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: rgba(30, 41, 59, 0.4);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .status-active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-overdue {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .status-returned {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    /* Modal dialogs */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 10, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .btn-modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .btn-modal-close:hover {
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 24px 28px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #0b1528;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .modal-footer {
+      padding: 18px 28px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: rgba(11, 21, 40, 0.5);
+    }
+
+    /* Spring API Inspector / Code Modal */
+    .code-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 20px 0;
+      background: #0b1528;
+      overflow-x: auto;
+    }
+
+    .code-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 16px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .code-tab-btn.active {
+      color: var(--blue-accent);
+      border-bottom-color: var(--blue-accent);
+    }
+
+    .code-view-area {
+      background: #070d18;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      max-height: 480px;
+      overflow: auto;
+      white-space: pre;
+    }
+
+    /* Notification toast */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #131e36;
+      border-left: 4px solid var(--blue-accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      padding: 14px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+      animation: toastSlide 0.3s ease;
+      min-width: 280px;
+      max-width: 420px;
+    }
+
+    .toast-success { border-left-color: var(--emerald); }
+    .toast-error { border-left-color: var(--rose); }
+    .toast-warning { border-left-color: var(--amber); }
+
+    @keyframes toastSlide {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .app-layout {
+        flex-direction: column;
+      }
+      .app-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 14px 20px;
+      }
+      .nav-menu {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .sidebar-user-card {
+        display: none;
+      }
+      .app-main {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-left"></div>
+
+  <!-- Header -->
+  <header class="top-header">
+    <a href="#" class="header-brand">
+      <div class="brand-icon">📚</div>
+      <div>
+        <div class="brand-title">ATHENAEUM</div>
+        <div class="brand-subtitle">ONLINE LIBRARY MANAGEMENT SYSTEM</div>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <!-- Role Switcher -->
+      <div class="role-badge">
+        <span class="role-indicator" id="roleIndicator"></span>
+        <span id="roleBadgeText" style="font-weight: 600; color: #fff;">Student: Rukhsar Maladhari</span>
+      </div>
+
+      <button class="btn-role-switch" id="btnToggleRole" onclick="toggleRole()">
+        <span>⇄</span>
+        <span id="roleSwitchLabel">Switch to Admin</span>
+      </button>
+
+      <button class="btn-spring-api" onclick="openCodeModal()">
+        <span>☕</span>
+        <span>Spring Boot & DB</span>
+      </button>
+
+      <a href="project.html" class="btn-back-portfolio">
+        <span>← Projects</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div>
+        <div class="nav-section-label">Navigation</div>
+        <ul class="nav-menu">
+          <li class="nav-item active" onclick="switchView('catalog', this)">
+            <span>📖</span>
+            <span>Book Catalog</span>
+            <span class="badge-count" id="badgeCatalog">10</span>
+          </li>
+          <li class="nav-item" id="navMyBorrows" onclick="switchView('my-borrows', this)">
+            <span>📥</span>
+            <span>My Borrowed Books</span>
+            <span class="badge-count" id="badgeMyBorrows">1</span>
+          </li>
+          <li class="nav-item" onclick="switchView('history', this)">
+            <span>🕒</span>
+            <span>Borrowing History</span>
+          </li>
+          <li class="nav-item" id="navAdminPanel" onclick="switchView('admin', this)" style="display: none;">
+            <span>🛡️</span>
+            <span>Admin Control Panel</span>
+            <span class="badge-count" id="badgeAdminRequests" style="color: var(--amber);">2</span>
+          </li>
+          <li class="nav-item" onclick="switchView('analytics', this)">
+            <span>📊</span>
+            <span>Analytics & Charts</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sidebar-user-card" id="sidebarUserCard">
+          <div class="user-avatar" id="sidebarAvatar">RM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebarUserName">Rukhsar Maladhari</div>
+            <div class="user-sub" id="sidebarUserSub">ID: STU-2025-084</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+
+      <!-- ======================================================== -->
+      <!-- VIEW 1: BOOK CATALOG -->
+      <!-- ======================================================== -->
+      <section id="view-catalog" class="app-view">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">
+              <span>Library Catalog</span>
+            </h1>
+            <p class="view-desc">
+              Browse available volumes, check real-time copy availability, and issue books to your account.
+            </p>
+          </div>
+          <div id="catalogAdminControls" style="display: none;">
+            <button class="btn-primary" onclick="openAddBookModal()">
+              <span>+</span>
+              <span>Add New Book</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="filter-bar">
+          <div class="search-box-wrapper">
+            <span>🔍</span>
+            <input type="text" id="catalogSearchInput" class="search-input" placeholder="Search by Title, Author, Category, or ISBN..." oninput="handleSearch(this.value)" />
+          </div>
+
+          <div class="category-pills" id="categoryPillContainer">
+            <button class="cat-pill active" onclick="filterByCategory('all', this)">All Categories</button>
+            <button class="cat-pill" onclick="filterByCategory('Classic Literature', this)">Classic Literature</button>
+            <button class="cat-pill" onclick="filterByCategory('Computer Science', this)">Computer Science</button>
+            <button class="cat-pill" onclick="filterByCategory('Poetry & Arts', this)">Poetry & Arts</button>
+            <button class="cat-pill" onclick="filterByCategory('Engineering', this)">Engineering</button>
+          </div>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-grid" id="booksGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 2: MY BORROWED BOOKS (Student View) -->
+      <!-- ======================================================== -->
+      <section id="view-my-borrows" class="app-view" style="display: none;">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">My Active Loans</h1>
+            <p class="view-desc">Books currently checked out under your student ID. Loan duration is 14 days.</p>
+          </div>
+          <div>
+            <button class="btn-secondary" onclick="switchView('catalog', document.querySelector('.nav-item:first-child'))">
+              <span>+ Borrow Another Book</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Book Title & Author</th>
+                  <th>ISBN</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Days Remaining</th>
+                  <th>Late Fine</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="myBorrowsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 3: BORROWING HISTORY -->
+      <!-- ======================================================== -->
+      <section id="view-history" class="app-view" style="display: none;">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Transaction & Return History</h1>
+            <p class="view-desc">Audit trail of all issued and returned library books with completion stamps.</p>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Record #</th>
+                  <th>User / Student</th>
+                  <th>Book Title</th>
+                  <th>Issue Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                  <th>Fine Assessed</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 4: ADMIN CONTROL PANEL -->
+      <!-- ======================================================== -->
+      <section id="view-admin" class="app-view" style="display: none;">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Head Librarian Administration</h1>
+            <p class="view-desc">Catalog management, loan approvals, student accounts, and overdue fines tracking.</p>
+          </div>
+          <div>
+            <button class="btn-primary" onclick="openAddBookModal()">
+              <span>+</span>
+              <span>Add Book to Catalog</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pending Book Requests -->
+        <h2 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px; font-weight: 700;">Pending Student Book Reservations</h2>
+        <div class="data-card" style="margin-bottom: 32px;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Student Name</th>
+                  <th>Student ID</th>
+                  <th>Book Requested</th>
+                  <th>Request Date</th>
+                  <th>Status</th>
+                  <th>Review Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminRequestsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Registered Students & Overdue Loans -->
+        <h2 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px; font-weight: 700;">Active Loan Monitor & Overdue Tracking</h2>
+        <div class="data-card">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Loan ID</th>
+                  <th>Borrower</th>
+                  <th>Book Title</th>
+                  <th>Due Date</th>
+                  <th>Overdue Status</th>
+                  <th>Calculated Fine (₹5/day)</th>
+                  <th>Admin Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminLoansTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 5: ANALYTICS & CHARTS -->
+      <!-- ======================================================== -->
+      <section id="view-analytics" class="app-view" style="display: none;">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title">Library Analytics & Metrics</h1>
+            <p class="view-desc">Circulation benchmarks, collection velocity, and real-time inventory statistics.</p>
+          </div>
+        </div>
+
+        <!-- Stats Ribbon -->
+        <div class="stats-ribbon">
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-number" id="statTotalTitles">10</div>
+            <div class="stat-label">Unique Titles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-number" id="statTotalCopies">32</div>
+            <div class="stat-label">Total Inventory Copies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🟢</div>
+            <div class="stat-number" id="statAvailableCopies" style="color: var(--emerald);">28</div>
+            <div class="stat-label">Available for Loan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📖</div>
+            <div class="stat-number" id="statCurrentlyIssued" style="color: var(--blue-accent);">4</div>
+            <div class="stat-label">Currently Issued</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-number" id="statOverdueCount" style="color: var(--rose);">1</div>
+            <div class="stat-label">Overdue Books</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-number" id="statFinesCollected" style="color: var(--amber);">₹45.00</div>
+            <div class="stat-label">Fines Assessed</div>
+          </div>
+        </div>
+
+        <!-- SVG Visual Charts -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px;">
+          <!-- Circulation Chart -->
+          <div class="data-card" style="padding: 24px;">
+            <h3 style="font-size: 0.95rem; color: #fff; margin-bottom: 6px; font-weight: 700;">Monthly Circulation Activity</h3>
+            <p style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 20px;">Book checkouts over the past 6 months (Academic Semester 2026)</p>
+
+            <svg viewBox="0 0 500 220" style="width: 100%; height: auto;">
+              <!-- Grid lines -->
+              <line x1="40" y1="20" x2="480" y2="20" stroke="rgba(148, 163, 184, 0.1)" stroke-dasharray="4" />
+              <line x1="40" y1="65" x2="480" y2="65" stroke="rgba(148, 163, 184, 0.1)" stroke-dasharray="4" />
+              <line x1="40" y1="110" x2="480" y2="110" stroke="rgba(148, 163, 184, 0.1)" stroke-dasharray="4" />
+              <line x1="40" y1="155" x2="480" y2="155" stroke="rgba(148, 163, 184, 0.1)" stroke-dasharray="4" />
+              <line x1="40" y1="190" x2="480" y2="190" stroke="rgba(148, 163, 184, 0.25)" />
+
+              <!-- Gradient Definition -->
+              <defs>
+                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+
+              <!-- Area Fill -->
+              <polygon points="50,160 120,135 190,95 260,80 330,45 400,30 460,25 460,190 50,190" fill="url(#chartGrad)" />
+
+              <!-- Trend Line -->
+              <polyline points="50,160 120,135 190,95 260,80 330,45 400,30 460,25" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Data dots -->
+              <circle cx="50" cy="160" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="120" cy="135" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="190" cy="95" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="260" cy="80" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="330" cy="45" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="400" cy="30" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+              <circle cx="460" cy="25" r="5" fill="#38bdf8" stroke="#0a0f1d" stroke-width="2" />
+
+              <!-- X-Axis Labels -->
+              <text x="50" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Jul</text>
+              <text x="120" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Aug</text>
+              <text x="190" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Sep</text>
+              <text x="260" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Oct</text>
+              <text x="330" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Nov</text>
+              <text x="400" y="210" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Dec</text>
+              <text x="460" y="210" fill="#38bdf8" font-weight="bold" font-size="11" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">Now</text>
+            </svg>
+          </div>
+
+          <!-- Category Breakdown Bar Chart -->
+          <div class="data-card" style="padding: 24px;">
+            <h3 style="font-size: 0.95rem; color: #fff; margin-bottom: 6px; font-weight: 700;">Subject & Category Holdings</h3>
+            <p style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 20px;">Percentage volume distribution across academic departments</p>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 6px;">
+                  <span style="color: #fff; font-weight: 600;">Computer Science & Engineering</span>
+                  <span style="color: var(--blue-accent); font-family: var(--font-mono);">40% (14 copies)</span>
+                </div>
+                <div class="meter-bar-bg" style="height: 9px;"><div class="meter-bar-fill" style="width: 40%; background: #38bdf8;"></div></div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 6px;">
+                  <span style="color: #fff; font-weight: 600;">Classic Literature & World Prose</span>
+                  <span style="color: #a78bfa; font-family: var(--font-mono);">30% (10 copies)</span>
+                </div>
+                <div class="meter-bar-bg" style="height: 9px;"><div class="meter-bar-fill" style="width: 30%; background: #a78bfa;"></div></div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 6px;">
+                  <span style="color: #fff; font-weight: 600;">Poetry & Arts</span>
+                  <span style="color: #f472b6; font-family: var(--font-mono);">18% (6 copies)</span>
+                </div>
+                <div class="meter-bar-bg" style="height: 9px;"><div class="meter-bar-fill" style="width: 18%; background: #f472b6;"></div></div>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 6px;">
+                  <span style="color: #fff; font-weight: 600;">Operating Systems & Hardware</span>
+                  <span style="color: #34d399; font-family: var(--font-mono);">12% (4 copies)</span>
+                </div>
+                <div class="meter-bar-bg" style="height: 9px;"><div class="meter-bar-fill" style="width: 12%; background: #34d399;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ISSUE / BORROW BOOK -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="modalBorrow">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="borrowModalTitle">Borrow Library Book</h3>
+        <button class="btn-modal-close" onclick="closeModal('modalBorrow')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">
+          Confirm the checkout details below. The loan period is 14 days, after which late fines accrue at ₹5.00 / day.
+        </p>
+        <div class="form-group">
+          <label class="form-label">Selected Volume</label>
+          <input type="text" id="borrowModalBookTitle" class="form-control" readonly />
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Borrower Name</label>
+            <input type="text" id="borrowModalUserName" class="form-control" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Student ID</label>
+            <input type="text" id="borrowModalUserId" class="form-control" readonly />
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Issue Date</label>
+            <input type="text" id="borrowModalIssueDate" class="form-control" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Due Date (+14 Days)</label>
+            <input type="text" id="borrowModalDueDate" class="form-control" readonly style="color: var(--blue-accent); font-weight: 600;" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('modalBorrow')">Cancel</button>
+        <button class="btn-primary" id="btnConfirmBorrow" onclick="confirmBorrow()">Confirm & Issue Book</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ADD / EDIT BOOK (ADMIN) -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="modalBookForm">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="bookFormTitle">Add New Book to Collection</h3>
+        <button class="btn-modal-close" onclick="closeModal('modalBookForm')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="formBookId" />
+        <div class="form-group">
+          <label class="form-label">Book Title *</label>
+          <input type="text" id="formBookTitle" class="form-control" placeholder="e.g. Introduction to Algorithms" required />
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Author *</label>
+            <input type="text" id="formBookAuthor" class="form-control" placeholder="e.g. Thomas H. Cormen" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ISBN *</label>
+            <input type="text" id="formBookIsbn" class="form-control" placeholder="978-0262033848" required />
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="formBookCategory" class="form-control">
+              <option value="Classic Literature">Classic Literature</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Poetry & Arts">Poetry & Arts</option>
+              <option value="Engineering">Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Copies *</label>
+            <input type="number" id="formBookCopies" class="form-control" min="1" max="50" value="3" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cover Artwork</label>
+          <select id="formBookCover" class="form-control">
+            <option value="book_cover_vintage_classics.jpg">Vintage Classics & Literature</option>
+            <option value="book_cover_peony_poetry.jpg">Peony Blossoms & Poetry</option>
+            <option value="book_cover_reader_silhouette.jpg">Reader Silhouette Archive</option>
+            <option value="book_cover_floral_shelf.jpg">Floral Shelf Antique Volume</option>
+            <option value="book_cover_ivy_bookshelf.jpg">Ivy Oak Classical Library</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="formBookDesc" class="form-control" rows="3" placeholder="Brief summary of syllabus or literary background..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('modalBookForm')">Cancel</button>
+        <button class="btn-primary" onclick="saveBookForm()">Save to Catalog</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: SPRING BOOT & DATABASE INSPECTOR -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="modalCode">
+    <div class="modal-box" style="max-width: 860px;">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Java Full Stack Architecture & REST APIs</h3>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Spring Boot 3.2 • Spring Security • Spring Data JPA • MySQL Relational Database</p>
+        </div>
+        <button class="btn-modal-close" onclick="closeModal('modalCode')">&times;</button>
+      </div>
+      <div class="code-tabs">
+        <button class="code-tab-btn active" onclick="switchCodeTab('schema', this)">schema.sql (MySQL)</button>
+        <button class="code-tab-btn" onclick="switchCodeTab('controller', this)">BookController.java</button>
+        <button class="code-tab-btn" onclick="switchCodeTab('service', this)">BorrowService.java</button>
+        <button class="code-tab-btn" onclick="switchCodeTab('security', this)">SecurityConfig.java</button>
+        <button class="code-tab-btn" onclick="switchCodeTab('pom', this)">pom.xml</button>
+        <button class="code-tab-btn" onclick="switchCodeTab('properties', this)">application.properties</button>
+      </div>
+      <pre class="code-view-area" id="codeViewArea"></pre>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <span style="font-size: 0.74rem; color: var(--text-dim);">All source files located in <code>backend/</code> folder</span>
+        <button class="btn-secondary" onclick="closeModal('modalCode')">Close Inspector</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Script Logic -->
+  <script>
+    // =========================================================================
+    // APPLICATION STATE MANAGEMENT (LocalStorage Persistence)
+    // =========================================================================
+
+    const DEFAULT_BOOKS = [
+      {
+        id: 1,
+        title: "Vintage Classics: Anthology of World Masterpieces",
+        author: "Jane Austen & Emily Brontë",
+        isbn: "978-0141439518",
+        category: "Classic Literature",
+        totalCopies: 4,
+        availableCopies: 3,
+        coverImage: "book_cover_vintage_classics.jpg",
+        description: "Hardcover collection including Pride and Prejudice, Wuthering Heights, and Emma."
+      },
+      {
+        id: 2,
+        title: "Peony Blossoms: The Poetry of Red Bones",
+        author: "Sylvia Plath & Maya Angelou",
+        isbn: "978-0060934347",
+        category: "Poetry & Arts",
+        totalCopies: 3,
+        availableCopies: 2,
+        coverImage: "book_cover_peony_poetry.jpg",
+        description: "Aesthetic collection of verse and lyrical reflections."
+      },
+      {
+        id: 3,
+        title: "The Hidden Garden & Silhouette Chronicles",
+        author: "Frances Hodgson Burnett",
+        isbn: "978-1503252431",
+        category: "Classic Literature",
+        totalCopies: 5,
+        availableCopies: 4,
+        coverImage: "book_cover_reader_silhouette.jpg",
+        description: "A mysterious journey through solitude, nature, and classic Victorian literature."
+      },
+      {
+        id: 4,
+        title: "Flora Botanica: Classical Herbarium Studies",
+        author: "Carl Linnaeus",
+        isbn: "978-0262529846",
+        category: "Classic Literature",
+        totalCopies: 4,
+        availableCopies: 3,
+        coverImage: "book_cover_floral_shelf.jpg",
+        description: "Historical botanical taxonomy and classic botanical illustrations."
+      },
+      {
+        id: 5,
+        title: "The Ivy Oak Library: Chronicles of Human Thought",
+        author: "Oxford Classical Studies",
+        isbn: "978-0199535569",
+        category: "Classic Literature",
+        totalCopies: 3,
+        availableCopies: 2,
+        coverImage: "book_cover_ivy_bookshelf.jpg",
+        description: "Comprehensive philosophical works curated from antique library archives."
+      },
+      {
+        id: 6,
+        title: "Introduction to Algorithms (CLRS 4th Edition)",
+        author: "Thomas H. Cormen, Charles E. Leiserson",
+        isbn: "978-0262046305",
+        category: "Computer Science",
+        totalCopies: 5,
+        availableCopies: 4,
+        coverImage: "book_cover_reader_silhouette.jpg",
+        description: "The definitive textbook on data structures, graph algorithms, and asymptotic complexity."
+      },
+      {
+        id: 7,
+        title: "Operating System Concepts (Silberschatz)",
+        author: "Abraham Silberschatz, Peter B. Galvin",
+        isbn: "978-1119800361",
+        category: "Computer Science",
+        totalCopies: 4,
+        availableCopies: 3,
+        coverImage: "book_cover_vintage_classics.jpg",
+        description: "Process synchronization, virtual memory, file systems, and CPU scheduling."
+      },
+      {
+        id: 8,
+        title: "Computer Architecture: A Quantitative Approach",
+        author: "John L. Hennessy & David A. Patterson",
+        isbn: "978-0128119051",
+        category: "Engineering",
+        totalCopies: 3,
+        availableCopies: 2,
+        coverImage: "book_cover_ivy_bookshelf.jpg",
+        description: "Instruction set design, memory hierarchy, cache coherence, and parallel processing."
+      }
+    ];
+
+    const DEFAULT_BORROWS = [
+      {
+        id: 101,
+        bookId: 1,
+        bookTitle: "Vintage Classics: Anthology of World Masterpieces",
+        isbn: "978-0141439518",
+        userId: "STU-2025-084",
+        userName: "Rukhsar Maladhari",
+        issueDate: "2026-11-01",
+        dueDate: "2026-11-15",
+        returnDate: null,
+        status: "ISSUED"
+      },
+      {
+        id: 102,
+        bookId: 6,
+        bookTitle: "Introduction to Algorithms (CLRS 4th Edition)",
+        isbn: "978-0262046305",
+        userId: "STU-2025-102",
+        userName: "Alex Mercer",
+        issueDate: "2026-10-20",
+        dueDate: "2026-11-03", // Overdue!
+        returnDate: null,
+        status: "OVERDUE"
+      }
+    ];
+
+    const DEFAULT_HISTORY = [
+      {
+        id: 98,
+        bookTitle: "Clean Architecture: A Craftsman's Guide",
+        userName: "Rukhsar Maladhari",
+        userId: "STU-2025-084",
+        issueDate: "2026-10-10",
+        returnDate: "2026-10-22",
+        status: "RETURNED",
+        fine: 0.00
+      },
+      {
+        id: 99,
+        bookTitle: "Flora Botanica: Classical Herbarium Studies",
+        userName: "Zoya Patel",
+        userId: "STU-2025-045",
+        issueDate: "2026-10-01",
+        returnDate: "2026-10-20",
+        status: "RETURNED",
+        fine: 25.00
+      }
+    ];
+
+    const DEFAULT_REQUESTS = [
+      {
+        id: 301,
+        studentName: "Alex Mercer",
+        studentId: "STU-2025-102",
+        bookTitle: "The Ivy Oak Library: Chronicles of Human Thought",
+        bookId: 5,
+        requestDate: "2026-11-10",
+        status: "PENDING"
+      },
+      {
+        id: 302,
+        studentName: "Rukhsar Maladhari",
+        studentId: "STU-2025-084",
+        bookTitle: "Operating System Concepts (Silberschatz)",
+        bookId: 7,
+        requestDate: "2026-11-12",
+        status: "PENDING"
+      }
+    ];
+
+    // Initialize state
+    let state = {
+      role: 'STUDENT', // 'STUDENT' or 'ADMIN'
+      activeUser: {
+        name: "Rukhsar Maladhari",
+        id: "STU-2025-084",
+        role: "ROLE_STUDENT",
+        avatar: "RM"
+      },
+      books: JSON.parse(localStorage.getItem('lib_books')) || DEFAULT_BOOKS,
+      borrows: JSON.parse(localStorage.getItem('lib_borrows')) || DEFAULT_BORROWS,
+      history: JSON.parse(localStorage.getItem('lib_history')) || DEFAULT_HISTORY,
+      requests: JSON.parse(localStorage.getItem('lib_requests')) || DEFAULT_REQUESTS,
+      currentCategory: 'all',
+      searchQuery: '',
+      selectedBookForBorrow: null
+    };
+
+    function persistState() {
+      localStorage.setItem('lib_books', JSON.stringify(state.books));
+      localStorage.setItem('lib_borrows', JSON.stringify(state.borrows));
+      localStorage.setItem('lib_history', JSON.stringify(state.history));
+      localStorage.setItem('lib_requests', JSON.stringify(state.requests));
+    }
+
+    // =========================================================================
+    // ROLE SWITCHING (Student <-> Admin)
+    // =========================================================================
+    function toggleRole() {
+      if (state.role === 'STUDENT') {
+        state.role = 'ADMIN';
+        state.activeUser = {
+          name: "Dr. Eleanor Vance (Head Librarian)",
+          id: "ADM-101",
+          role: "ROLE_ADMIN",
+          avatar: "EV"
+        };
+        showToast("Switched to Admin Role: Full Management Privileges", "warning");
+      } else {
+        state.role = 'STUDENT';
+        state.activeUser = {
+          name: "Rukhsar Maladhari",
+          id: "STU-2025-084",
+          role: "ROLE_STUDENT",
+          avatar: "RM"
+        };
+        showToast("Switched to Student Role: Rukhsar Maladhari", "success");
+      }
+      updateRoleUI();
+      renderAll();
+    }
+
+    function updateRoleUI() {
+      const isStudent = state.role === 'STUDENT';
+      document.getElementById('roleBadgeText').textContent = isStudent ? "Student: Rukhsar Maladhari" : "Admin: Eleanor Vance";
+      document.getElementById('roleIndicator').style.background = isStudent ? "var(--emerald)" : "var(--amber)";
+      document.getElementById('roleIndicator').style.boxShadow = isStudent ? "0 0 10px var(--emerald)" : "0 0 10px var(--amber)";
+      document.getElementById('roleSwitchLabel').textContent = isStudent ? "Switch to Admin" : "Switch to Student";
+
+      document.getElementById('sidebarAvatar').textContent = state.activeUser.avatar;
+      document.getElementById('sidebarUserName').textContent = state.activeUser.name;
+      document.getElementById('sidebarUserSub').textContent = `ID: ${state.activeUser.id}`;
+
+      // Admin navigation visibility
+      document.getElementById('navAdminPanel').style.display = isStudent ? 'none' : 'flex';
+      document.getElementById('catalogAdminControls').style.display = isStudent ? 'none' : 'block';
+    }
+
+    // =========================================================================
+    // VIEW SWITCHER
+    // =========================================================================
+    function switchView(viewName, navEl) {
+      document.querySelectorAll('.app-view').forEach(view => view.style.display = 'none');
+      const targetView = document.getElementById(`view-${viewName}`);
+      if (targetView) targetView.style.display = 'block';
+
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      if (navEl) navEl.classList.add('active');
+
+      renderAll();
+    }
+
+    // =========================================================================
+    // RENDER FUNCTIONS
+    // =========================================================================
+    function renderAll() {
+      renderBooksGrid();
+      renderMyBorrows();
+      renderHistory();
+      renderAdminTables();
+      updateBadges();
+      updateStats();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val.toLowerCase().trim();
+      renderBooksGrid();
+    }
+
+    function filterByCategory(cat, btn) {
+      state.currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderBooksGrid();
+    }
+
+    function renderBooksGrid() {
+      const container = document.getElementById('booksGrid');
+      let filtered = state.books;
+
+      if (state.currentCategory !== 'all') {
+        filtered = filtered.filter(b => b.category === state.currentCategory);
+      }
+
+      if (state.searchQuery) {
+        filtered = filtered.filter(b =>
+          b.title.toLowerCase().includes(state.searchQuery) ||
+          b.author.toLowerCase().includes(state.searchQuery) ||
+          b.isbn.toLowerCase().includes(state.searchQuery) ||
+          b.category.toLowerCase().includes(state.searchQuery)
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🔍</div>
+            <h3 style="color: #fff; margin-bottom: 6px;">No books matched your criteria</h3>
+            <p style="font-size: 0.85rem;">Try modifying your keyword search or selected category filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const isAdmin = state.role === 'ADMIN';
+
+      container.innerHTML = filtered.map(b => {
+        const isAvailable = b.availableCopies > 0;
+        const percent = Math.round((b.availableCopies / b.totalCopies) * 100);
+
+        return `
+          <article class="book-card">
+            <div class="book-cover-container">
+              <img src="${b.coverImage}" alt="${b.title}" class="book-cover-img" onerror="this.src='frames/${b.coverImage}'" />
+              <span class="book-badge-availability ${isAvailable ? 'badge-available' : 'badge-unavailable'}">
+                ${isAvailable ? `Available (${b.availableCopies}/${b.totalCopies})` : 'Checked Out (0 copies)'}
+              </span>
+              <span class="book-category-tag">${b.category}</span>
+            </div>
+            <div class="book-card-body">
+              <h3 class="book-card-title">${b.title}</h3>
+              <p class="book-card-author">by ${b.author}</p>
+
+              <div class="book-meta-grid">
+                <span>ISBN: <strong>${b.isbn}</strong></span>
+                <span>Copies: <strong>${b.availableCopies} of ${b.totalCopies}</strong></span>
+              </div>
+
+              <div class="copies-meter">
+                <div class="meter-label">
+                  <span>Stock Availability</span>
+                  <span style="font-family: var(--font-mono);">${percent}%</span>
+                </div>
+                <div class="meter-bar-bg">
+                  <div class="meter-bar-fill" style="width: ${percent}%;"></div>
+                </div>
+              </div>
+
+              <div class="book-card-actions">
+                ${!isAdmin ? `
+                  <button class="btn-card-action btn-borrow" ${!isAvailable ? 'disabled' : ''} onclick="openBorrowModal(${b.id})">
+                    <span>${isAvailable ? '📥 Borrow Book' : '⏳ Waitlist Request'}</span>
+                  </button>
+                ` : `
+                  <button class="btn-card-action btn-edit-admin" onclick="openEditBookModal(${b.id})">
+                    <span>✏️ Edit</span>
+                  </button>
+                  <button class="btn-card-action btn-delete-admin" title="Delete book" onclick="deleteBook(${b.id})">
+                    <span>🗑️</span>
+                  </button>
+                `}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // BORROW & RETURN LOGIC
+    // =========================================================================
+    function openBorrowModal(bookId) {
+      const book = state.books.find(b => b.id === bookId);
+      if (!book) return;
+
+      if (book.availableCopies <= 0) {
+        // Reserve waitlist request
+        requestBook(book);
+        return;
+      }
+
+      state.selectedBookForBorrow = book;
+      document.getElementById('borrowModalBookTitle').value = `${book.title} (ISBN: ${book.isbn})`;
+      document.getElementById('borrowModalUserName').value = state.activeUser.name;
+      document.getElementById('borrowModalUserId').value = state.activeUser.id;
+
+      const today = new Date();
+      const dueDate = new Date();
+      dueDate.setDate(today.getDate() + 14);
+
+      document.getElementById('borrowModalIssueDate').value = today.toISOString().split('T')[0];
+      document.getElementById('borrowModalDueDate').value = dueDate.toISOString().split('T')[0];
+
+      openModal('modalBorrow');
+    }
+
+    function confirmBorrow() {
+      const book = state.selectedBookForBorrow;
+      if (!book || book.availableCopies <= 0) {
+        showToast("Book copy is no longer available.", "error");
+        closeModal('modalBorrow');
+        return;
+      }
+
+      // Check max limits (5 books)
+      const myActive = state.borrows.filter(b => b.userId === state.activeUser.id && b.status !== 'RETURNED');
+      if (myActive.length >= 5) {
+        showToast("Maximum borrowing quota reached (5 books max). Return a book first.", "error");
+        closeModal('modalBorrow');
+        return;
+      }
+
+      // Decrement copy
+      book.availableCopies--;
+
+      const today = new Date();
+      const dueDate = new Date();
+      dueDate.setDate(today.getDate() + 14);
+
+      const newBorrow = {
+        id: Date.now(),
+        bookId: book.id,
+        bookTitle: book.title,
+        isbn: book.isbn,
+        userId: state.activeUser.id,
+        userName: state.activeUser.name,
+        issueDate: today.toISOString().split('T')[0],
+        dueDate: dueDate.toISOString().split('T')[0],
+        returnDate: null,
+        status: "ISSUED"
+      };
+
+      state.borrows.unshift(newBorrow);
+      persistState();
+      closeModal('modalBorrow');
+      showToast(`Successfully issued "${book.title}". Due in 14 days.`, "success");
+      renderAll();
+    }
+
+    function returnBook(borrowId) {
+      const record = state.borrows.find(b => b.id === borrowId);
+      if (!record) return;
+
+      const today = new Date();
+      const dueDate = new Date(record.dueDate);
+      const isOverdue = today > dueDate;
+      let fine = 0;
+
+      if (isOverdue) {
+        const diffTime = Math.abs(today - dueDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        fine = diffDays * 5; // ₹5 per day
+      }
+
+      // Update book copies
+      const book = state.books.find(b => b.id === record.bookId);
+      if (book) {
+        book.availableCopies = Math.min(book.totalCopies, book.availableCopies + 1);
+      }
+
+      // Move from active borrows to history
+      state.borrows = state.borrows.filter(b => b.id !== borrowId);
+
+      const historyItem = {
+        id: record.id,
+        bookTitle: record.bookTitle,
+        userName: record.userName,
+        userId: record.userId,
+        issueDate: record.issueDate,
+        returnDate: today.toISOString().split('T')[0],
+        status: "RETURNED",
+        fine: fine
+      };
+
+      state.history.unshift(historyItem);
+      persistState();
+
+      if (fine > 0) {
+        showToast(`Book returned late! Fine of ₹${fine}.00 assessed.`, "warning");
+      } else {
+        showToast(`Book "${record.bookTitle}" successfully returned on time!`, "success");
+      }
+
+      renderAll();
+    }
+
+    function requestBook(book) {
+      const existing = state.requests.find(r => r.bookId === book.id && r.studentId === state.activeUser.id && r.status === 'PENDING');
+      if (existing) {
+        showToast("You already have an active pending reservation for this title.", "warning");
+        return;
+      }
+
+      state.requests.unshift({
+        id: Date.now(),
+        studentName: state.activeUser.name,
+        studentId: state.activeUser.id,
+        bookTitle: book.title,
+        bookId: book.id,
+        requestDate: new Date().toISOString().split('T')[0],
+        status: "PENDING"
+      });
+
+      persistState();
+      showToast(`Reservation request logged for "${book.title}". Awaiting Librarian approval.`, "success");
+      renderAll();
+    }
+
+    function renderMyBorrows() {
+      const container = document.getElementById('myBorrowsTableBody');
+      const myBorrows = state.borrows.filter(b => b.userId === state.activeUser.id);
+
+      if (myBorrows.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">
+              You currently have no checked-out books. Explore the catalog to borrow volumes!
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const today = new Date();
+
+      container.innerHTML = myBorrows.map(b => {
+        const dueDate = new Date(b.dueDate);
+        const diffTime = dueDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const isOverdue = diffDays < 0;
+        const fine = isOverdue ? Math.abs(diffDays) * 5 : 0;
+
+        return `
+          <tr>
+            <td>
+              <strong style="color: #fff; font-size: 0.88rem;">${b.bookTitle}</strong>
+            </td>
+            <td><code style="color: var(--blue-accent); font-family: var(--font-mono);">${b.isbn}</code></td>
+            <td>${b.issueDate}</td>
+            <td style="color: ${isOverdue ? 'var(--rose)' : 'inherit'}; font-weight: 600;">${b.dueDate}</td>
+            <td>
+              ${isOverdue ? `
+                <span class="status-badge status-overdue">⚠️ ${Math.abs(diffDays)} Days Overdue</span>
+              ` : `
+                <span class="status-badge status-active">⏳ ${diffDays} Days Left</span>
+              `}
+            </td>
+            <td>
+              <span style="font-family: var(--font-mono); color: ${fine > 0 ? 'var(--rose)' : 'var(--emerald)'}; font-weight: 700;">
+                ₹${fine}.00
+              </span>
+            </td>
+            <td>
+              <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.74rem;" onclick="returnBook(${b.id})">
+                <span>🔄 Return Book</span>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyTableBody');
+      if (state.history.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">
+              No past transactions recorded yet.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      container.innerHTML = state.history.map(h => `
+        <tr>
+          <td><code style="font-family: var(--font-mono); color: var(--text-dim);">#REC-${h.id}</code></td>
+          <td>
+            <strong>${h.userName}</strong>
+            <div style="font-size: 0.7rem; color: var(--text-dim); font-family: var(--font-mono);">${h.userId}</div>
+          </td>
+          <td>${h.bookTitle}</td>
+          <td>${h.issueDate}</td>
+          <td>${h.returnDate}</td>
+          <td><span class="status-badge status-returned">RETURNED</span></td>
+          <td>
+            <span style="font-family: var(--font-mono); color: ${h.fine > 0 ? 'var(--rose)' : 'var(--emerald)'};">
+              ₹${h.fine}.00
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderAdminTables() {
+      // Pending requests
+      const reqContainer = document.getElementById('adminRequestsTableBody');
+      const pendingReqs = state.requests.filter(r => r.status === 'PENDING');
+
+      if (pendingReqs.length === 0) {
+        reqContainer.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);">
+              No pending student reservation requests.
+            </td>
+          </tr>
+        `;
+      } else {
+        reqContainer.innerHTML = pendingReqs.map(r => `
+          <tr>
+            <td><code style="color: var(--blue-accent); font-family: var(--font-mono);">#REQ-${r.id}</code></td>
+            <td><strong>${r.studentName}</strong></td>
+            <td><code style="font-family: var(--font-mono);">${r.studentId}</code></td>
+            <td>${r.bookTitle}</td>
+            <td>${r.requestDate}</td>
+            <td><span class="status-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">PENDING</span></td>
+            <td>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-primary" style="padding: 5px 10px; font-size: 0.72rem;" onclick="handleRequest(${r.id}, true)">Approve</button>
+                <button class="btn-secondary" style="padding: 5px 10px; font-size: 0.72rem; color: #f87171;" onclick="handleRequest(${r.id}, false)">Reject</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Active loans for admin
+      const loansContainer = document.getElementById('adminLoansTableBody');
+      if (state.borrows.length === 0) {
+        loansContainer.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);">
+              All library copies are accounted for. No active loans currently issued.
+            </td>
+          </tr>
+        `;
+      } else {
+        const today = new Date();
+        loansContainer.innerHTML = state.borrows.map(b => {
+          const dueDate = new Date(b.dueDate);
+          const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+          const isOverdue = diffDays < 0;
+          const fine = isOverdue ? Math.abs(diffDays) * 5 : 0;
+
+          return `
+            <tr>
+              <td><code style="font-family: var(--font-mono); color: var(--text-dim);">#LN-${b.id}</code></td>
+              <td>
+                <strong>${b.userName}</strong>
+                <div style="font-size: 0.7rem; color: var(--text-dim); font-family: var(--font-mono);">${b.userId}</div>
+              </td>
+              <td>${b.bookTitle}</td>
+              <td style="color: ${isOverdue ? 'var(--rose)' : 'inherit'}; font-weight: 600;">${b.dueDate}</td>
+              <td>
+                ${isOverdue ? `
+                  <span class="status-badge status-overdue">OVERDUE (+${Math.abs(diffDays)}d)</span>
+                ` : `
+                  <span class="status-badge status-active">ACTIVE (${diffDays}d)</span>
+                `}
+              </td>
+              <td>
+                <span style="font-family: var(--font-mono); color: ${fine > 0 ? 'var(--rose)' : 'var(--emerald)'}; font-weight: 700;">
+                  ₹${fine}.00
+                </span>
+              </td>
+              <td>
+                <button class="btn-secondary" style="padding: 5px 10px; font-size: 0.72rem;" onclick="returnBook(${b.id})">
+                  Force Check-In
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+
+    function handleRequest(reqId, approved) {
+      const req = state.requests.find(r => r.id === reqId);
+      if (!req) return;
+
+      req.status = approved ? 'APPROVED' : 'REJECTED';
+      persistState();
+
+      if (approved) {
+        showToast(`Request #${reqId} approved for ${req.studentName}!`, "success");
+      } else {
+        showToast(`Request #${reqId} rejected.`, "warning");
+      }
+      renderAll();
+    }
+
+    // =========================================================================
+    // ADMIN BOOK CRUD (Add, Edit, Delete)
+    // =========================================================================
+    function openAddBookModal() {
+      document.getElementById('bookFormTitle').textContent = "Add New Book to Collection";
+      document.getElementById('formBookId').value = "";
+      document.getElementById('formBookTitle').value = "";
+      document.getElementById('formBookAuthor').value = "";
+      document.getElementById('formBookIsbn').value = "978-" + Math.floor(1000000000 + Math.random() * 9000000000).toString().substring(0, 10);
+      document.getElementById('formBookCategory').value = "Computer Science";
+      document.getElementById('formBookCopies').value = "4";
+      document.getElementById('formBookCover').value = "book_cover_vintage_classics.jpg";
+      document.getElementById('formBookDesc').value = "";
+      openModal('modalBookForm');
+    }
+
+    function openEditBookModal(bookId) {
+      const book = state.books.find(b => b.id === bookId);
+      if (!book) return;
+
+      document.getElementById('bookFormTitle').textContent = `Edit: ${book.title}`;
+      document.getElementById('formBookId').value = book.id;
+      document.getElementById('formBookTitle').value = book.title;
+      document.getElementById('formBookAuthor').value = book.author;
+      document.getElementById('formBookIsbn').value = book.isbn;
+      document.getElementById('formBookCategory').value = book.category;
+      document.getElementById('formBookCopies').value = book.totalCopies;
+      document.getElementById('formBookCover').value = book.coverImage;
+      document.getElementById('formBookDesc').value = book.description || "";
+      openModal('modalBookForm');
+    }
+
+    function saveBookForm() {
+      const title = document.getElementById('formBookTitle').value.trim();
+      const author = document.getElementById('formBookAuthor').value.trim();
+      const isbn = document.getElementById('formBookIsbn').value.trim();
+      const category = document.getElementById('formBookCategory').value;
+      const totalCopies = parseInt(document.getElementById('formBookCopies').value, 10) || 1;
+      const coverImage = document.getElementById('formBookCover').value;
+      const desc = document.getElementById('formBookDesc').value.trim();
+      const idVal = document.getElementById('formBookId').value;
+
+      if (!title || !author || !isbn) {
+        showToast("Please complete all required fields (Title, Author, ISBN).", "error");
+        return;
+      }
+
+      if (idVal) {
+        // Edit existing
+        const book = state.books.find(b => b.id === parseInt(idVal, 10));
+        if (book) {
+          const diff = totalCopies - book.totalCopies;
+          book.title = title;
+          book.author = author;
+          book.isbn = isbn;
+          book.category = category;
+          book.totalCopies = totalCopies;
+          book.availableCopies = Math.max(0, book.availableCopies + diff);
+          book.coverImage = coverImage;
+          book.description = desc;
+          showToast(`Book "${title}" updated successfully!`, "success");
+        }
+      } else {
+        // Add new
+        const newBook = {
+          id: Date.now(),
+          title,
+          author,
+          isbn,
+          category,
+          totalCopies,
+          availableCopies: totalCopies,
+          coverImage,
+          description: desc
+        };
+        state.books.unshift(newBook);
+        showToast(`New book "${title}" added to catalog!`, "success");
+      }
+
+      persistState();
+      closeModal('modalBookForm');
+      renderAll();
+    }
+
+    function deleteBook(bookId) {
+      const book = state.books.find(b => b.id === bookId);
+      if (!book) return;
+
+      if (book.availableCopies < book.totalCopies) {
+        showToast(`Cannot delete "${book.title}" because copies are currently checked out.`, "error");
+        return;
+      }
+
+      if (confirm(`Are you sure you want to delete "${book.title}" from the catalog?`)) {
+        state.books = state.books.filter(b => b.id !== bookId);
+        persistState();
+        showToast(`"${book.title}" was removed from the catalog.`, "warning");
+        renderAll();
+      }
+    }
+
+    // =========================================================================
+    // STATS & BADGES
+    // =========================================================================
+    function updateBadges() {
+      document.getElementById('badgeCatalog').textContent = state.books.length;
+      const myBorrowsCount = state.borrows.filter(b => b.userId === state.activeUser.id).length;
+      document.getElementById('badgeMyBorrows').textContent = myBorrowsCount;
+      const pendingReqs = state.requests.filter(r => r.status === 'PENDING').length;
+      document.getElementById('badgeAdminRequests').textContent = pendingReqs;
+    }
+
+    function updateStats() {
+      const totalTitles = state.books.length;
+      const totalCopies = state.books.reduce((acc, b) => acc + b.totalCopies, 0);
+      const availableCopies = state.books.reduce((acc, b) => acc + b.availableCopies, 0);
+      const currentlyIssued = state.borrows.length;
+
+      const today = new Date();
+      const overdueCount = state.borrows.filter(b => new Date(b.dueDate) < today).length;
+
+      const totalFines = state.history.reduce((acc, h) => acc + (h.fine || 0), 0) +
+                         state.borrows.reduce((acc, b) => {
+                           const dueDate = new Date(b.dueDate);
+                           if (today > dueDate) {
+                             const days = Math.ceil((today - dueDate) / (1000 * 60 * 60 * 24));
+                             return acc + (days * 5);
+                           }
+                           return acc;
+                         }, 0);
+
+      document.getElementById('statTotalTitles').textContent = totalTitles;
+      document.getElementById('statTotalCopies').textContent = totalCopies;
+      document.getElementById('statAvailableCopies').textContent = availableCopies;
+      document.getElementById('statCurrentlyIssued').textContent = currentlyIssued;
+      document.getElementById('statOverdueCount').textContent = overdueCount;
+      document.getElementById('statFinesCollected').textContent = `₹${totalFines.toFixed(2)}`;
+    }
+
+    // =========================================================================
+    // MODAL HELPERS
+    // =========================================================================
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function showToast(msg, type = "success") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      toast.innerHTML = `<strong>${icon}</strong> <span>${msg}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // =========================================================================
+    // CODE INSPECTOR MODAL TABS
+    // =========================================================================
+    const CODE_SNIPPETS = {
+      schema: `-- ============================================================================
+-- ONLINE LIBRARY MANAGEMENT SYSTEM - MYSQL SCHEMA
+-- Database: library_db | Author: Rukhsar Maladhari
+-- ============================================================================
+
+CREATE DATABASE IF NOT EXISTS library_db CHARACTER SET utf8mb4;
+USE library_db;
+
+-- 1. USERS TABLE (Role-Based Access: ROLE_STUDENT, ROLE_ADMIN)
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL, -- BCrypt hashed
+    student_id VARCHAR(50) UNIQUE,
+    role VARCHAR(30) NOT NULL DEFAULT 'ROLE_STUDENT',
+    status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. BOOKS TABLE
+CREATE TABLE books (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    author VARCHAR(150) NOT NULL,
+    isbn VARCHAR(30) NOT NULL UNIQUE,
+    category_id BIGINT NOT NULL,
+    total_copies INT NOT NULL DEFAULT 1,
+    available_copies INT NOT NULL DEFAULT 1,
+    cover_image VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+-- 3. BORROW RECORDS TABLE
+CREATE TABLE borrow_records (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    book_id BIGINT NOT NULL,
+    issue_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    return_date DATE,
+    status VARCHAR(20) NOT NULL DEFAULT 'ISSUED',
+    fine_amount DECIMAL(10,2) DEFAULT 0.00,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);`,
+
+      controller: `package com.library.controller;
+
+import com.library.dto.LibraryDtos.BookRequestPayload;
+import com.library.model.Book;
+import com.library.service.BookService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+public class BookController {
+
+    private final BookService bookService;
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam(required = false) String q) {
+        return ResponseEntity.ok(bookService.searchBooks(q));
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody BookRequestPayload payload) {
+        return ResponseEntity.ok(bookService.addBook(payload));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookRequestPayload payload) {
+        return ResponseEntity.ok(bookService.updateBook(id, payload));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.noContent().build();
+    }
+}`,
+
+      service: `package com.library.service;
+
+import com.library.dto.LibraryDtos.ReturnResponse;
+import com.library.model.*;
+import com.library.repository.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+@Service
+@RequiredArgsConstructor
+public class BorrowService {
+
+    private final BorrowRecordRepository borrowRecordRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
+    private final FineRepository fineRepository;
+
+    @Transactional
+    public BorrowRecord issueBook(Long userId, Long bookId) {
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        if (book.getAvailableCopies() <= 0) {
+            throw new RuntimeException("No copies available for issue.");
+        }
+
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+        bookRepository.save(book);
+
+        LocalDate issueDate = LocalDate.now();
+        LocalDate dueDate = issueDate.plusDays(14); // 14-day loan
+
+        BorrowRecord record = BorrowRecord.builder()
+            .user(userRepository.findById(userId).orElseThrow())
+            .book(book)
+            .issueDate(issueDate)
+            .dueDate(dueDate)
+            .status("ISSUED")
+            .build();
+
+        return borrowRecordRepository.save(record);
+    }
+
+    @Transactional
+    public ReturnResponse returnBook(Long borrowRecordId) {
+        BorrowRecord record = borrowRecordRepository.findById(borrowRecordId)
+            .orElseThrow(() -> new RuntimeException("Record not found"));
+
+        LocalDate returnDate = LocalDate.now();
+        record.setReturnDate(returnDate);
+        record.setStatus("RETURNED");
+
+        int daysOverdue = 0;
+        BigDecimal fine = BigDecimal.ZERO;
+
+        if (returnDate.isAfter(record.getDueDate())) {
+            daysOverdue = (int) ChronoUnit.DAYS.between(record.getDueDate(), returnDate);
+            fine = BigDecimal.valueOf(daysOverdue * 5.00); // ₹5/day
+            record.setFineAmount(fine);
+        }
+
+        Book book = record.getBook();
+        book.setAvailableCopies(book.getAvailableCopies() + 1);
+        bookRepository.save(book);
+
+        borrowRecordRepository.save(record);
+        return ReturnResponse.builder()
+            .borrowId(record.getId())
+            .fineAmount(fine)
+            .daysOverdue(daysOverdue)
+            .build();
+    }
+}`,
+
+      security: `package com.library.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/auth/**", "/books/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/borrow/**").hasAnyRole("STUDENT", "ADMIN")
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
+}`,
+
+      pom: `<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.library</groupId>
+    <artifactId>online-library-system</artifactId>
+    <version>1.0.0</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+    </dependencies>
+</project>`,
+
+      properties: `# Spring Boot Configuration
+server.port=8080
+server.servlet.context-path=/api
+
+spring.datasource.url=jdbc:mysql://localhost:3306/library_db?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root1234
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+app.jwt.secret=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+app.library.loan-duration-days=14
+app.library.fine-rate-per-day=5.00`
+    };
+
+    function openCodeModal() {
+      switchCodeTab('schema', document.querySelector('.code-tab-btn:first-child'));
+      openModal('modalCode');
+    }
+
+    function switchCodeTab(tabKey, btn) {
+      document.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.getElementById('codeViewArea').textContent = CODE_SNIPPETS[tabKey] || "// No code available";
+    }
+
+    // Initial boot
+    document.addEventListener('DOMContentLoaded', () => {
+      updateRoleUI();
+      renderAll();
+    });
+  </script>
+</body>
+</html>

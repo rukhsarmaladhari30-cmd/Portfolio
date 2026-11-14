@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brew & Co. — Artisanal Coffeehouse & Roastery</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #120b08;
+      --bg-card: rgba(28, 17, 13, 0.78);
+      --bg-card-hover: rgba(38, 24, 18, 0.92);
+      --amber-warm: #e6a15c;
+      --amber-glow: rgba(230, 161, 92, 0.35);
+      --copper: #c87d4a;
+      --cream: #fbf5ee;
+      --cream-soft: #ebdacf;
+      --text-muted: #bda596;
+      --border-warm: rgba(230, 161, 92, 0.2);
+      --olive-green: #4a5d4e;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--cream);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      overflow-x: hidden;
+      background: radial-gradient(circle at 80% 15%, rgba(138, 72, 38, 0.3) 0%, rgba(18, 11, 8, 0.96) 55%, #0d0705 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Top Portfolio Return Banner */
+    .top-portfolio-bar {
+      background: rgba(10, 5, 3, 0.92);
+      border-bottom: 1px solid rgba(230, 161, 92, 0.15);
+      padding: 9px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      z-index: 110;
+      position: relative;
+    }
+
+    .top-portfolio-bar a {
+      color: var(--amber-warm);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .top-portfolio-bar a:hover {
+      color: #fff;
+    }
+
+    /* Sticky Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(18, 11, 8, 0.85);
+      border-bottom: 1px solid var(--border-warm);
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--amber-warm);
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin-top: 1px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      font-weight: 500;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--amber-warm);
+    }
+
+    .btn-reserve {
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 18px rgba(200, 125, 74, 0.3);
+    }
+
+    .btn-reserve:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(230, 161, 92, 0.45);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      align-items: center;
+      gap: 50px;
+      padding: 60px 0;
+      position: relative;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber-warm);
+      background: rgba(230, 161, 92, 0.12);
+      border: 1px solid rgba(230, 161, 92, 0.3);
+      padding: 7px 18px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5.8vw, 4.6rem);
+      line-height: 1.08;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #fbf5ee 0%, #e6a15c 60%, #c87d4a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 14px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(230, 161, 92, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-warm);
+      color: var(--cream);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 13px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: rgba(230, 161, 92, 0.05);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--amber-warm);
+      background: rgba(230, 161, 92, 0.15);
+      color: var(--amber-warm);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Visual Showcase */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-main-card {
+      width: 100%;
+      height: 480px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .hero-main-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .hero-main-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: rgba(26, 16, 12, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-warm);
+      padding: 16px 24px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .badge-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(230, 161, 92, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--amber-warm);
+    }
+
+    .badge-info strong {
+      display: block;
+      color: #fff;
+      font-size: 0.92rem;
+    }
+
+    .badge-info span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Stats strip */
+    .highlights-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 34px;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-warm);
+      border-radius: 24px;
+      margin: 40px 0 100px;
+    }
+
+    .highlight-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 12px;
+      border-left: 1px solid rgba(230, 161, 92, 0.15);
+    }
+
+    .highlight-item:first-child {
+      border-left: none;
+    }
+
+    .highlight-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--amber-warm);
+      line-height: 1;
+    }
+
+    .highlight-title {
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .highlight-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* Section Headers */
+    .section-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 50px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.74rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber-warm);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 60px 0 120px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-images-collage {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      position: relative;
+    }
+
+    .about-img-box {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      height: 360px;
+    }
+
+    .about-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .about-img-box:hover img {
+      transform: scale(1.06);
+    }
+
+    .about-img-box.tall {
+      height: 420px;
+      margin-top: -30px;
+    }
+
+    .about-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .about-lead {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--cream);
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    .about-p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
+    .about-features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .feature-icon {
+      font-size: 1.3rem;
+      color: var(--amber-warm);
+    }
+
+    .feature-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .feature-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Menu Section */
+    .menu-section {
+      padding: 60px 0 120px;
+      position: relative;
+    }
+
+    .menu-filter-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .menu-tab-btn {
+      background: rgba(28, 17, 13, 0.6);
+      border: 1px solid var(--border-warm);
+      color: var(--cream-soft);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: var(--font-sans);
+    }
+
+    .menu-tab-btn:hover,
+    .menu-tab-btn.active {
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      border-color: var(--amber-warm);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 161, 92, 0.35);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .menu-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .menu-item-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--amber-warm);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .item-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .item-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .item-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #120b08;
+      background: var(--amber-warm);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .item-price {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--amber-warm);
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .item-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .item-tag {
+      font-size: 0.68rem;
+      color: var(--cream-soft);
+      background: rgba(230, 161, 92, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* Ambience & Gallery Section */
+    .gallery-section {
+      padding: 60px 0 120px;
+    }
+
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      height: 380px;
+      cursor: pointer;
+    }
+
+    .gallery-item.span-2 {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease, filter 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 8, 6, 0.9) 0%, transparent 60%);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0.95;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber-warm);
+      font-weight: 600;
+    }
+
+    .gallery-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #ffffff;
+      margin-top: 2px;
+    }
+
+    /* Contact & Reservation Section */
+    .reservation-section {
+      padding: 60px 0 120px;
+    }
+
+    .booking-card {
+      background: linear-gradient(135deg, rgba(38, 22, 16, 0.9) 0%, rgba(20, 11, 8, 0.95) 100%);
+      border: 1px solid var(--border-warm);
+      border-radius: 28px;
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 50px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .booking-info h3 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: #fff;
+      line-height: 1.15;
+    }
+
+    .booking-info p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--cream-soft);
+      font-size: 0.92rem;
+    }
+
+    .info-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(230, 161, 92, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--amber-warm);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber-warm);
+      font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(14, 8, 6, 0.8);
+      border: 1px solid var(--border-warm);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--amber-warm);
+      box-shadow: 0 0 15px rgba(230, 161, 92, 0.25);
+      background: rgba(24, 14, 10, 0.95);
+    }
+
+    .btn-submit-booking {
+      background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);
+      color: #120b08;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-submit-booking:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(230, 161, 92, 0.4);
+    }
+
+    .booking-success-message {
+      display: none;
+      background: rgba(40, 85, 50, 0.5);
+      border: 1px solid rgba(110, 225, 140, 0.4);
+      color: #bbf7d0;
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border-warm);
+      background: rgba(12, 6, 4, 0.95);
+      padding: 40px 6vw 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand h4 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--amber-warm);
+      letter-spacing: 0.12em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.76rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--amber-warm);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(230, 161, 92, 0.1);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .portfolio-credit {
+      color: var(--amber-warm);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .portfolio-credit:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-content {
+        align-items: center;
+      }
+
+      .hero-desc {
+        margin: 0 auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .highlights-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .highlight-item {
+        border-left: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-images-collage {
+        order: 2;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-masonry {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item.span-2 {
+        grid-column: span 1;
+      }
+
+      .booking-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .highlights-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Portfolio Indicator -->
+  <aside class="top-portfolio-bar">
+    <span>Web Development Showcase Project</span>
+    <a href="index.html">← Back to Rukhsar's Portfolio</a>
+  </aside>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="#home" class="brand">
+      <span class="brand-title">Brew & Co.</span>
+      <span class="brand-sub">Artisanal Coffee & Roastery</span>
+    </a>
+    <nav class="nav-menu">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About Us</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#ambience" class="nav-link">Ambience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <a href="#contact" class="btn-reserve">Book a Table</a>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="home">
+      <div class="hero-content">
+        <span class="hero-badge">✦ Specialty Coffee & Bakes</span>
+        <h1 class="hero-title">
+          Where Every Cup Tells <span>An Artisanal Story.</span>
+        </h1>
+        <p class="hero-desc">
+          Single-origin Arabica roasts, handcrafted espresso, and freshly baked viennoiserie served in a warm botanical sanctuary designed for work, connection, and conversation.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-primary">
+            <span>Explore Menu</span>
+            <span>→</span>
+          </a>
+          <a href="#contact" class="btn-outline">
+            <span>Reserve Table</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-main-card">
+          <img src="cafe_brew_bar.jpg" alt="Brew & Co. Coffee Bar Counter" />
+        </div>
+        <div class="hero-floating-badge">
+          <div class="badge-icon-box">☕</div>
+          <div class="badge-info">
+            <strong>Coffee & Good Vibes</strong>
+            <span>Handcrafted Daily from 8:00 AM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS STAT STRIP -->
+    <section class="highlights-strip">
+      <div class="highlight-item">
+        <span class="highlight-num">100%</span>
+        <span class="highlight-title">Single-Origin Arabica</span>
+        <span class="highlight-desc">Ethically sourced from high-altitude estates</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-num">18+</span>
+        <span class="highlight-title">Artisan Brews</span>
+        <span class="highlight-desc">Cold brews, pour-overs, and seasonal specialties</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-num">Daily</span>
+        <span class="highlight-title">Fresh Oven Bakes</span>
+        <span class="highlight-desc">Croissants, sourdough, & signature desserts</span>
+      </div>
+      <div class="highlight-item">
+        <span class="highlight-num">4.9 ★</span>
+        <span class="highlight-title">Guest Satisfaction</span>
+        <span class="highlight-desc">Nagpur's favorite community hangout</span>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT SECTION -->
+    <section class="about-section" id="about">
+      <div class="about-grid">
+        <div class="about-images-collage">
+          <div class="about-img-box tall">
+            <img src="cafe_botanical_counter.jpg" alt="Botanical Cafe Interior Counter" />
+          </div>
+          <div class="about-img-box">
+            <img src="cafe_wall_art.jpg" alt="Better Coffee Bigger Dreams Wall Art" />
+          </div>
+        </div>
+
+        <div class="about-text-col">
+          <span class="section-eyebrow">OUR HERITAGE & PASSION</span>
+          <h2 class="section-title">Crafting moments of warmth & coffee excellence.</h2>
+          <p class="about-lead">
+            "Better coffee, bigger dreams — every bean is chosen with mindfulness and roasted with precision."
+          </p>
+          <p class="about-p">
+            Brew & Co. was born out of a desire to create an aesthetic oasis where slow coffee culture meets modern community warmth. Surrounded by cascading lush vines, warm terracotta textures, and hand-carved woodwork, our cafe is a sanctuary for writers, founders, students, and coffee aficionados.
+          </p>
+
+          <div class="about-features-list">
+            <div class="feature-card">
+              <span class="feature-icon">🌿</span>
+              <span class="feature-title">Botanical Ambience</span>
+              <span class="feature-desc">Calming indoor flora & warm pendant illumination.</span>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">⚡</span>
+              <span class="feature-title">Work-Friendly Space</span>
+              <span class="feature-desc">High-speed Wi-Fi, quiet corners & charging outlets.</span>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🥐</span>
+              <span class="feature-title">Artisan Bakery</span>
+              <span class="feature-desc">Warm croissants, artisanal cakes, & sourdough loaves.</span>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">✨</span>
+              <span class="feature-title">Master Baristas</span>
+              <span class="feature-desc">Precise water-to-coffee ratios & microfoam latte art.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MENU SECTION -->
+    <section class="menu-section" id="menu">
+      <div class="section-head">
+        <span class="section-eyebrow">TASTE THE CRAFT</span>
+        <h2 class="section-title">Artisan Coffee & Kitchen Menu</h2>
+        <p class="section-sub">
+          Handcrafted with single-origin beans, organic dairy alternatives, and locally sourced ingredients.
+        </p>
+      </div>
+
+      <!-- Menu Category Tabs -->
+      <div class="menu-filter-nav">
+        <button class="menu-tab-btn active" data-category="all">All Items</button>
+        <button class="menu-tab-btn" data-category="espresso">Signature Espresso</button>
+        <button class="menu-tab-btn" data-category="brews">Cold Brews & Tonics</button>
+        <button class="menu-tab-btn" data-category="tea">Artisan Teas & Lattes</button>
+        <button class="menu-tab-btn" data-category="bakery">Fresh Bakery & Bakes</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="menu-grid">
+
+        <!-- Item 1 -->
+        <article class="menu-item-card" data-category="espresso">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Salted Caramel Cloud Latte</h3>
+              <span class="item-badge">Bestseller</span>
+            </div>
+            <p class="item-desc">Double ristretto, velvety steamed milk, house-made Himalayan salted caramel foam.</p>
+            <div class="item-tags">
+              <span class="item-tag">Hot / Iced</span>
+              <span class="item-tag">House Specialty</span>
+            </div>
+          </div>
+          <span class="item-price">₹280</span>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="menu-item-card" data-category="espresso">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Spanish Cortado</h3>
+            </div>
+            <p class="item-desc">Equal parts rich espresso extraction and silky textured condensed & whole milk.</p>
+            <div class="item-tags">
+              <span class="item-tag">Strong</span>
+              <span class="item-tag">Traditional</span>
+            </div>
+          </div>
+          <span class="item-price">₹220</span>
+        </article>
+
+        <!-- Item 3 -->
+        <article class="menu-item-card" data-category="brews">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">16-Hour Nitro Cold Brew</h3>
+              <span class="item-badge">Signature</span>
+            </div>
+            <p class="item-desc">Slow-steeped single origin Arabica infused with nitrogen for a Guinness-like creamy head.</p>
+            <div class="item-tags">
+              <span class="item-tag">Zero Sugar</span>
+              <span class="item-tag">Velvety Smooth</span>
+            </div>
+          </div>
+          <span class="item-price">₹260</span>
+        </article>
+
+        <!-- Item 4 -->
+        <article class="menu-item-card" data-category="brews">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Espresso Tonic & Rosemary</h3>
+            </div>
+            <p class="item-desc">Crisp artisanal tonic water topped with espresso shot and flame-torched rosemary sprig.</p>
+            <div class="item-tags">
+              <span class="item-tag">Refreshing</span>
+              <span class="item-tag">Citrus Notes</span>
+            </div>
+          </div>
+          <span class="item-price">₹250</span>
+        </article>
+
+        <!-- Item 5 -->
+        <article class="menu-item-card" data-category="tea">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Kyoto Ceremonial Matcha</h3>
+              <span class="item-badge">Organic</span>
+            </div>
+            <p class="item-desc">Stone-ground Uji matcha whisked to order with almond milk and wild organic wildflower honey.</p>
+            <div class="item-tags">
+              <span class="item-tag">Antioxidant Rich</span>
+              <span class="item-tag">Vegan</span>
+            </div>
+          </div>
+          <span class="item-price">₹290</span>
+        </article>
+
+        <!-- Item 6 -->
+        <article class="menu-item-card" data-category="tea">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Spiced Kashmiri Kahwa</h3>
+            </div>
+            <p class="item-desc">Green tea leaves steeped with Kashmiri saffron strands, green cardamom, cinnamon, and slivered almonds.</p>
+            <div class="item-tags">
+              <span class="item-tag">Aromatic</span>
+              <span class="item-tag">Heritage</span>
+            </div>
+          </div>
+          <span class="item-price">₹210</span>
+        </article>
+
+        <!-- Item 7 -->
+        <article class="menu-item-card" data-category="bakery">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Almond Butter Croissant</h3>
+              <span class="item-badge">Fresh Baked</span>
+            </div>
+            <p class="item-desc">Double-baked flaky French butter pastry filled with rich almond frangipane and toasted flakes.</p>
+            <div class="item-tags">
+              <span class="item-tag">French Butter</span>
+              <span class="item-tag">Chef Favorite</span>
+            </div>
+          </div>
+          <span class="item-price">₹240</span>
+        </article>
+
+        <!-- Item 8 -->
+        <article class="menu-item-card" data-category="bakery">
+          <div class="item-info">
+            <div class="item-head">
+              <h3 class="item-title">Dark Belgian Tiramisu</h3>
+              <span class="item-badge">Dessert</span>
+            </div>
+            <p class="item-desc">Espresso-soaked savoiardi biscuits layered with light mascarpone mousse and cocoa dust.</p>
+            <div class="item-tags">
+              <span class="item-tag">Single Origin Espresso</span>
+            </div>
+          </div>
+          <span class="item-price">₹310</span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 4. AMBIENCE & GALLERY -->
+    <section class="gallery-section" id="ambience">
+      <div class="section-head">
+        <span class="section-eyebrow">VISUAL SANCTUARY</span>
+        <h2 class="section-title">The Brew & Co. Experience</h2>
+        <p class="section-sub">
+          Step into our botanical haven designed for slow mornings, productive afternoons, and cozy candlelit evenings.
+        </p>
+      </div>
+
+      <div class="gallery-masonry">
+        <!-- Photo 1: Brew Bar Counter (Span 2) -->
+        <div class="gallery-item span-2">
+          <img src="cafe_brew_bar.jpg" alt="Artisan Coffee Bar Counter" />
+          <div class="gallery-overlay">
+            <span class="gallery-tag">The Main Bar</span>
+            <h3 class="gallery-title">Espresso Machine & Fresh Daily Bakes</h3>
+          </div>
+        </div>
+
+        <!-- Photo 2: Green Velvet Seating -->
+        <div class="gallery-item">
+          <img src="cafe_ambience_vibes.jpg" alt="Coffee and Good Vibes Velvet Seating" />
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Cozy Corners</span>
+            <h3 class="gallery-title">Coffee & Good Vibes Booths</h3>
+          </div>
+        </div>
+
+        <!-- Photo 3: Stone Wall Neon Sign -->
+        <div class="gallery-item">
+          <img src="cafe_interior_seating.jpg" alt="Textured Stone Wall Seating" />
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Interior Architecture</span>
+            <h3 class="gallery-title">Natural Stone & Wood Finishes</h3>
+          </div>
+        </div>
+
+        <!-- Photo 4: Botanical Counter & French Windows (Span 2) -->
+        <div class="gallery-item span-2">
+          <img src="cafe_botanical_counter.jpg" alt="Botanical Cafe Counter & Garden Views" />
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Botanical Sanctuary</span>
+            <h3 class="gallery-title">Rattan Lights & Garden Arch Windows</h3>
+          </div>
+        </div>
+
+        <!-- Photo 5: Wall Art -->
+        <div class="gallery-item">
+          <img src="cafe_wall_art.jpg" alt="Better Coffee Bigger Dreams Mural" />
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Inspirational Space</span>
+            <h3 class="gallery-title">Better Coffee, Bigger Dreams</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CONTACT & RESERVATION -->
+    <section class="reservation-section" id="contact">
+      <div class="booking-card">
+        <div class="booking-info">
+          <div>
+            <span class="section-eyebrow">RESERVE YOUR TABLE</span>
+            <h3>Join Us For An Unforgettable Coffee Experience.</h3>
+            <p style="margin-top: 14px;">
+              Whether catching up with friends, hosting a creative session, or enjoying quiet reading time, we have a table waiting for you.
+            </p>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row">
+              <div class="info-icon">📍</div>
+              <div>
+                <strong>Location:</strong>
+                <div>Civil Lines, Nagpur, Maharashtra, India</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon">📞</div>
+              <div>
+                <strong>Phone & WhatsApp:</strong>
+                <div>+91 9329625759</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon">✉</div>
+              <div>
+                <strong>Email:</strong>
+                <div>rukhsarmaladhari30@gmail.com</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon">⏰</div>
+              <div>
+                <strong>Operating Hours:</strong>
+                <div>Mon – Sun: 8:00 AM – 11:00 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Reservation Form -->
+        <form class="booking-form" onsubmit="handleReservation(event)">
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="bookName">Full Name *</label>
+              <input type="text" id="bookName" placeholder="Your Name" required />
+            </div>
+            <div class="form-field">
+              <label for="bookPhone">Mobile Number *</label>
+              <input type="tel" id="bookPhone" placeholder="+91 9329625759" required />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="bookDate">Date *</label>
+              <input type="date" id="bookDate" required />
+            </div>
+            <div class="form-field">
+              <label for="bookTime">Time *</label>
+              <select id="bookTime" required>
+                <option value="">Select Time Slot</option>
+                <option value="09:00 AM">09:00 AM - Morning Coffee</option>
+                <option value="11:30 AM">11:30 AM - Brunch</option>
+                <option value="02:30 PM">02:30 PM - Afternoon Work</option>
+                <option value="05:30 PM">05:30 PM - Sunset Brew</option>
+                <option value="08:00 PM">08:00 PM - Dinner & Dessert</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="bookGuests">Number of Guests *</label>
+            <select id="bookGuests" required>
+              <option value="1">1 Person (Quiet Work Table)</option>
+              <option value="2" selected>2 People (Cozy Booth)</option>
+              <option value="3-4">3 - 4 People (Round Table)</option>
+              <option value="5+">5+ People (Community Seating)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="bookNote">Special Requests / Seating Preference</label>
+            <textarea id="bookNote" rows="2" placeholder="e.g. Garden window booth, anniversary, almond milk preference..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit-booking">
+            <span>Confirm Reservation</span>
+            <span>→</span>
+          </button>
+
+          <div class="booking-success-message" id="bookingSuccess">
+            <strong>✓ Table Reserved!</strong>
+            <div>Your table request has been received. A confirmation SMS/WhatsApp will be sent to your number shortly. See you at Brew & Co.!</div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>Brew & Co. Artisanal Coffee</h4>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Civil Lines, Nagpur • Handcrafted Brews & Botanical Ambience</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#ambience">Ambience</a>
+        <a href="#contact">Contact</a>
+        <a href="index.html">Developer Portfolio</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        © 2026 Brew & Co. Coffeehouse. All rights reserved.
+      </div>
+      <div>
+        Designed & Developed by <a href="index.html" class="portfolio-credit">Rukhsar Maladhari</a> (Software Developer)
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Menu Category Filter Logic
+    const menuButtons = document.querySelectorAll('.menu-tab-btn');
+    const menuCards = document.querySelectorAll('.menu-item-card');
+
+    menuButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        menuButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.getAttribute('data-category');
+
+        menuCards.forEach(card => {
+          const itemCat = card.getAttribute('data-category');
+          if (category === 'all' || itemCat === category) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Handle Reservation Submission
+    function handleReservation(e) {
+      e.preventDefault();
+      const name = document.getElementById('bookName').value;
+      const phone = document.getElementById('bookPhone').value;
+      const date = document.getElementById('bookDate').value;
+      const time = document.getElementById('bookTime').value;
+      const guests = document.getElementById('bookGuests').value;
+
+      const successBox = document.getElementById('bookingSuccess');
+      successBox.style.display = 'block';
+
+      // Set today as minimum date
+      setTimeout(() => {
+        alert(`Reservation confirmed for ${name} (${guests} guests) on ${date} at ${time}. We look forward to welcoming you!`);
+      }, 500);
+    }
+
+    // Set default reservation date to today
+    const dateInput = document.getElementById('bookDate');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+  </script>
+</body>
+</html>

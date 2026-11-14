@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rukhsar Maladhari — Software Developer & Digital Systems</title>
+
+  <!-- Luxury Editorial Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       EMERALD & GOLD LUXURY EDITORIAL SYSTEM
+       ============================================================ */
+    :root {
+      --bg-dark: #0e0306;
+      --bg-burgundy-deep: #1a050b;
+      --bg-emerald-card: rgba(26, 5, 11, 0.65);
+      --bg-emerald-hover: rgba(42, 8, 18, 0.85);
+      --gold-primary: #e5b399;
+      --gold-light: #f4d3bf;
+      --gold-dark: #b87352;
+      --gold-muted: #df9f7d;
+      --gold-border: rgba(229, 179, 153, 0.22);
+      --gold-glow: rgba(229, 179, 153, 0.35);
+      --text-gold-gradient: linear-gradient(180deg, #ffffff 0%, #f4d3bf 55%, #df9f7d 100%);
+      --text-white: #ffffff;
+      --text-light: #fbeee6;
+      --text-muted: #c4a89d;
+      --glass-panel: rgba(26, 5, 11, 0.65);
+      --glass-border: rgba(229, 179, 153, 0.22);
+    }
+
+    [data-theme="light"] {
+      --bg-dark: #faf5f2;
+      --bg-burgundy-deep: #f5ebe6;
+      --bg-emerald-card: rgba(255, 255, 255, 0.88);
+      --bg-emerald-hover: rgba(255, 255, 255, 0.96);
+      --text-white: #1a050b;
+      --text-light: #2d0d15;
+      --text-muted: #6b3542;
+      --gold-primary: #a8583b;
+      --gold-light: #7c2d12;
+      --gold-border: rgba(168, 88, 59, 0.25);
+      --gold-glow: rgba(168, 88, 59, 0.25);
+      --text-gold-gradient: linear-gradient(180deg, #1a050b 0%, #7c2d12 65%, #a8583b 100%);
+      --glass-panel: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(168, 88, 59, 0.22);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed Full-Page Editorial Background Image */
+    .fixed-editorial-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image:
+        linear-gradient(180deg, rgba(14, 3, 6, 0.2) 0%, rgba(14, 3, 6, 0.48) 45%, rgba(10, 2, 4, 0.82) 100%),
+        url('mariana_bg.jpg');
+      background-position: center top;
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    [data-theme="light"] .fixed-editorial-bg {
+      background-image:
+        linear-gradient(180deg, rgba(250, 245, 242, 0.65) 0%, rgba(250, 245, 242, 0.85) 60%, rgba(250, 245, 242, 0.95) 100%),
+        url('mariana_bg.jpg');
+    }
+
+    /* Fixed Sparkle Cursor Canvas */
+    .sparkle-cursor-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none !important;
+      z-index: 999999;
+    }
+
+    /* Fixed Scroll Progress Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #d4af37, #f4e4ba, #d4af37);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+      z-index: 9999;
+      transition: width 0.1s linear, opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+    }
+
+    /* ============================================================
+       TOP EDITORIAL NAVBAR
+       ============================================================ */
+    .editorial-navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 3, 6, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gold-border);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="light"] .editorial-navbar {
+      background: rgba(245, 248, 245, 0.85);
+      border-bottom-color: rgba(138, 108, 30, 0.18);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand-monogram-box {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      letter-spacing: 0.12em;
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.2em;
+      color: var(--text-white);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-item {
+      font-size: 0.74rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    [data-theme="light"] .nav-item:hover,
+    [data-theme="light"] .nav-item.active {
+      color: var(--gold-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .theme-toggle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-border);
+      background: rgba(212, 175, 55, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--gold-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 18px var(--gold-glow);
+    }
+
+    .btn-nav-connect {
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #01140e;
+      background: linear-gradient(135deg, #f4e4ba 0%, #d4af37 100%);
+      padding: 10px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-nav-connect:hover {
+      transform: translateY(-2px);
+      background: #ffffff;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+    }
+
+    /* ============================================================
+       1. HERO SECTION (EDITORIAL EMERALD VELVET & GOLD)
+       ============================================================ */
+    .hero-editorial-wrap {
+      position: relative;
+      min-height: 94vh;
+      width: 100%;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 6vw 50px;
+      border-bottom: 1px solid var(--gold-border);
+      box-sizing: border-box;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    [data-theme="light"] .hero-editorial-wrap {
+      background: transparent;
+      url('emerald_bg.jpg') top center / cover no-repeat;
+    }
+
+    .hero-editorial-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-left-col {
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-editorial-monogram {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      letter-spacing: 0.1em;
+      line-height: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-domains-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-domains-list span {
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    [data-theme="light"] .hero-domains-list span {
+      color: var(--gold-primary);
+      text-shadow: none;
+    }
+
+    .hero-editorial-manifesto {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      font-weight: 400;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+      max-width: 380px;
+    }
+
+    [data-theme="light"] .hero-editorial-manifesto {
+      color: var(--text-white);
+      text-shadow: none;
+      font-weight: 500;
+    }
+
+    .hero-cursive-signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: var(--gold-light);
+      margin-top: 4px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      letter-spacing: 0.04em;
+    }
+
+    [data-theme="light"] .hero-cursive-signature {
+      color: var(--gold-primary);
+      text-shadow: none;
+    }
+
+    .hero-right-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 40px;
+      text-align: right;
+    }
+
+    .hero-meta-badge {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-year {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.2em;
+    }
+
+    .meta-role {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    /* Rotating Luxury Seal Badge */
+    .hero-seal-badge {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seal-svg {
+      width: 100%;
+      height: 100%;
+      animation: rotateSeal 22s linear infinite;
+    }
+
+    @keyframes rotateSeal {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .seal-text {
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      fill: var(--gold-light);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .seal-star {
+      position: absolute;
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      text-shadow: 0 0 12px var(--gold-glow);
+    }
+
+    /* Grand Monumental Title */
+    .hero-monumental-box {
+      width: 100%;
+      text-align: center;
+      margin-top: auto;
+      padding-top: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-monumental-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3.4rem, 11vw, 9.8rem);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      background: var(--text-gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.7));
+    }
+
+    .hero-monumental-sub {
+      font-size: clamp(0.75rem, 1.4vw, 1.15rem);
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    [data-theme="light"] .hero-monumental-sub {
+      color: var(--gold-primary);
+      text-shadow: none;
+    }
+
+    /* ============================================================
+       MAIN CONTENT CONTAINER
+       ============================================================ */
+    .editorial-content-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 5vw 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 90px;
+    }
+
+    /* ============================================================
+       2. VISION THAT DRIVES EXCELLENCE (4 COLUMNS STRIP)
+       ============================================================ */
+    .vision-strip {
+      background: var(--bg-emerald-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 50px 45px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 45px;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .vision-left {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--gold-border);
+      padding-right: 30px;
+    }
+
+    .vision-line {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: 0.15em;
+      line-height: 1.2;
+    }
+
+    .vision-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      line-height: 1.1;
+      margin-top: 4px;
+    }
+
+    .vision-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .vision-pillar-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vision-pillar-icon {
+      font-size: 1.3rem;
+      color: var(--gold-primary);
+      text-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .vision-pillar-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    [data-theme="light"] .vision-pillar-title {
+      color: var(--gold-primary);
+    }
+
+    .vision-pillar-desc {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       3. FEATURED WORK (4 EDITORIAL PROJECTS)
+       ============================================================ */
+    .featured-work-section {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .section-editorial-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--gold-border);
+      padding-bottom: 14px;
+    }
+
+    .sec-left-label {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    .sec-right-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .editorial-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .editorial-card {
+      background: var(--bg-emerald-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .editorial-card:hover {
+      border-color: var(--gold-primary);
+      background: var(--bg-emerald-hover);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--gold-glow);
+    }
+
+    .editorial-card-badge {
+      font-size: 0.64rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .editorial-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--text-white);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .editorial-card-desc {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .editorial-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+
+    .editorial-card-tag {
+      font-size: 0.64rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .editorial-plus-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-border);
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--gold-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .editorial-card:hover .editorial-plus-btn {
+      background: var(--gold-primary);
+      color: #01140e;
+      transform: rotate(90deg);
+    }
+
+    /* ============================================================
+       4. TECHNICAL EXPERTISE BAR (LIKE BRAND LOGOS)
+       ============================================================ */
+    .trusted-stack-bar {
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 36px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      background: rgba(26, 5, 11, 0.45);
+      border-radius: 16px;
+    }
+
+    .trusted-stack-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-muted);
+      font-weight: 700;
+    }
+
+    .trusted-brands-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(24px, 5vw, 60px);
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .brand-item {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 1.6vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold-light);
+      opacity: 0.85;
+      transition: all 0.25s ease;
+    }
+
+    .brand-item:hover {
+      opacity: 1;
+      color: #ffffff;
+      text-shadow: 0 0 15px var(--gold-glow);
+    }
+
+    [data-theme="light"] .brand-item {
+      color: var(--gold-primary);
+      opacity: 0.9;
+    }
+
+    /* ============================================================
+       5. ENDORSEMENT & ENGINEERING MISSION
+       ============================================================ */
+    .endorsement-card {
+      background: var(--bg-emerald-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 45px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .endorsement-quote-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .endorsement-mark {
+      font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      color: var(--gold-primary);
+      line-height: 0.8;
+    }
+
+    .endorsement-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.45rem;
+      line-height: 1.6;
+      color: var(--text-white);
+      font-weight: 500;
+    }
+
+    .endorsement-author {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .endorsement-badge-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .endorsement-badge-card {
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 34px 28px;
+      text-align: center;
+      background: rgba(14, 3, 6, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .endorsement-star {
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      text-shadow: 0 0 12px var(--gold-glow);
+      margin-bottom: 4px;
+    }
+
+    .endorsement-inst-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      color: var(--text-white);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .endorsement-inst-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .endorsement-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold-border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       6. RESUME SECTION
+       ============================================================ */
+    .resume-section {
+      background: var(--bg-emerald-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 50px 45px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--gold-border);
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .resume-badge {
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .resume-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      letter-spacing: 0.15em;
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    .btn-resume-download {
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #01140e;
+      background: linear-gradient(135deg, #f4e4ba 0%, #d4af37 100%);
+      padding: 12px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-resume-download:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+    }
+
+    .resume-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .resume-block {
+      background: rgba(14, 3, 6, 0.65);
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .resume-block:hover {
+      border-color: var(--gold-primary);
+      background: rgba(2, 28, 20, 0.85);
+      transform: translateY(-3px);
+    }
+
+    .resume-block-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+
+    [data-theme="light"] .resume-block-title {
+      color: var(--gold-primary);
+    }
+
+    .resume-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      color: var(--text-white);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .resume-year {
+      font-size: 0.72rem;
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+
+    .resume-item-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .resume-item-detail {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    .resume-course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .resume-course-tags span {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--text-white);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold-border);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       7. CONTACT SECTION (MATCHES UPLOADED MOCKUP BOTTOM)
+       ============================================================ */
+    .editorial-contact-section {
+      background: var(--bg-emerald-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 55px 45px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .contact-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .contact-headline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.2vw, 2.6rem);
+      letter-spacing: 0.1em;
+      color: var(--text-white);
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    .contact-headline-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold-primary);
+      font-size: 1.15em;
+      font-weight: 700;
+    }
+
+    .contact-sub {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 360px;
+    }
+
+    .btn-editorial-connect {
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #01140e;
+      background: linear-gradient(135deg, #f4e4ba 0%, #d4af37 100%);
+      padding: 13px 28px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin-top: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-editorial-connect:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.45);
+    }
+
+    .contact-center-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border-left: 1px solid var(--gold-border);
+      border-right: 1px solid var(--gold-border);
+      padding: 0 35px;
+    }
+
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .contact-info-row:hover {
+      color: var(--gold-primary);
+    }
+
+    .contact-info-icon {
+      font-size: 1.1rem;
+      color: var(--gold-primary);
+    }
+
+    .contact-right-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-business-badge {
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 34px 24px;
+      text-align: center;
+      background: rgba(14, 3, 6, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 280px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .badge-emblem {
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      text-shadow: 0 0 12px var(--gold-glow);
+    }
+
+    .badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--text-white);
+      text-transform: uppercase;
+    }
+
+    .badge-role {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .badge-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold-border);
+      margin: 4px 0;
+    }
+
+    .badge-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       BOTTOM EDITORIAL FOOTER
+       ============================================================ */
+    .editorial-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 6vw;
+      border-top: 1px solid var(--gold-border);
+      background: rgba(14, 3, 6, 0.9);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .editorial-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 12px;
+      transition: color 0.2s ease;
+    }
+
+    .editorial-footer a:hover {
+      color: var(--gold-primary);
+    }
+
+    .footer-tagline {
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       CONTACT FORM MODAL
+       ============================================================ */
+    .form-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(14, 3, 6, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .form-modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .form-modal-card {
+      background: linear-gradient(145deg, rgba(38, 8, 16, 0.96) 0%, rgba(20, 4, 8, 0.98) 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 24px;
+      padding: 44px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 35px var(--gold-glow);
+      transform: translateY(20px) scale(0.96);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] .form-modal-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(138, 108, 30, 0.25);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-modal-backdrop.active .form-modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .form-close-btn {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-weight: 700;
+    }
+
+    .form-close-btn:hover {
+      background: var(--gold-primary);
+      color: #01140e;
+      transform: rotate(90deg);
+    }
+
+    .form-title-group {
+      margin-bottom: 24px;
+    }
+
+    .form-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .form-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      color: var(--text-white);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .form-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-label {
+      font-size: 0.74rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    [data-theme="light"] .form-label {
+      color: var(--text-white);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: rgba(1, 18, 13, 0.75);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 0.92rem;
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      outline: none;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    [data-theme="light"] .form-input,
+    [data-theme="light"] .form-textarea {
+      background: rgba(245, 248, 245, 0.9);
+      color: #0a1f18;
+      border-color: rgba(138, 108, 30, 0.25);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #f4e4ba 0%, #d4af37 100%);
+      color: #01140e;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 15px 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .form-submit-btn:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.45);
+    }
+
+    .form-success-banner {
+      display: none;
+      background: rgba(3, 40, 28, 0.85);
+      border: 1px solid var(--gold-primary);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      color: var(--gold-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    /* ============================================================
+       RESPONSIVE ERGONOMICS
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .vision-strip {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .vision-left {
+        border-right: none;
+        border-bottom: 1px solid var(--gold-border);
+        padding-right: 0;
+        padding-bottom: 24px;
+      }
+
+      .vision-pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .editorial-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .endorsement-card {
+        grid-template-columns: 1fr;
+      }
+
+      .editorial-contact-section {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .contact-center-col {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid var(--gold-border);
+        border-bottom: 1px solid var(--gold-border);
+        padding: 25px 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .editorial-navbar {
+        padding: 16px 5vw;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hero-editorial-top {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .hero-right-col {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .vision-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .editorial-projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resume-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed Full-Page Editorial Background -->
+  <div class="fixed-editorial-bg" aria-hidden="true"></div>
+
+  <!-- Fixed Progress Bar -->
+  <div id="loader"></div>
+
+  <!-- Sparkle Cursor Canvas -->
+  <canvas id="sparkle-cursor-canvas" class="sparkle-cursor-canvas"></canvas>
+
+  <!-- Luxury Editorial Navbar -->
+  <header class="editorial-navbar">
+    <a href="#hero" class="brand-group">
+      <div class="brand-monogram-box">RM</div>
+      <div class="brand-meta">
+        <span class="brand-name">Rukhsar Maladhari</span>
+        <span class="brand-sub">Software Developer</span>
+      </div>
+    </a>
+
+    <nav class="nav-menu">
+      <a href="#hero" class="nav-item active">HOME</a>
+      <a href="#about" class="nav-item">VISION</a>
+      <a href="#work" class="nav-item">PROJECTS</a>
+      <a href="#resume" class="nav-item">RESUME</a>
+      <a href="#contact" class="nav-item">CONTACT</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="themeToggleBtn" class="theme-toggle-btn" type="button" aria-label="Toggle dark and light mode"
+        title="Switch Theme">
+        <span class="theme-toggle-icon">🌙</span>
+      </button>
+      <button type="button" class="btn-nav-connect btn-open-work-modal">
+        <span>LET'S CONNECT</span>
+        <span>→</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION (EDITORIAL EMERALD VELVET & GOLD) -->
+  <section class="hero-editorial-wrap" id="hero">
+    <div class="hero-editorial-top">
+      <!-- Left Column -->
+      <div class="hero-left-col">
+        <div class="hero-editorial-monogram">RM</div>
+        <div class="hero-domains-list">
+          <span>SOFTWARE ENGINEERING</span>
+          <span>FULL STACK ARCHITECTURE</span>
+          <span>ALGORITHMIC LOGIC</span>
+          <span>CREATIVE COMPUTING</span>
+        </div>
+        <p class="hero-editorial-manifesto">
+          I craft timeless digital architectures and high-performance software systems that inspire, perform, and scale.
+        </p>
+        <div class="hero-cursive-signature">Rukhsar Maladhari</div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="hero-right-col">
+        <div class="hero-meta-badge">
+          <span class="meta-year">2026</span>
+          <span class="meta-role">SOFTWARE DEVELOPER<br>PORTFOLIO</span>
+        </div>
+
+        <!-- Rotating Luxury Seal Badge -->
+        <div class="hero-seal-badge">
+          <svg class="seal-svg" viewBox="0 0 160 160">
+            <path id="sealCircle" d="M 80, 80 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0" fill="transparent" />
+            <text class="seal-text">
+              <textPath href="#sealCircle" startOffset="0%">
+                • DESIGNING PURPOSE • BUILDING LEGACY •
+              </textPath>
+            </text>
+          </svg>
+          <div class="seal-star">✦</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monumental Gold Title -->
+    <div class="hero-monumental-box">
+      <h1 class="hero-monumental-title">PORTFOLIO</h1>
+      <div class="hero-monumental-sub">
+        <span>STRATEGY.</span>
+        <span>ARCHITECTURE.</span>
+        <span>IMPACT.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Editorial Content Area -->
+  <main class="editorial-content-container">
+
+    <!-- 2. VISION THAT DRIVES EXCELLENCE -->
+    <section class="vision-strip" id="about">
+      <div class="vision-left">
+        <span class="vision-line">VISION</span>
+        <span class="vision-line">THAT DRIVES</span>
+        <span class="vision-italic">EXCELLENCE</span>
+      </div>
+      <div class="vision-pillars-grid">
+        <div class="vision-pillar-card">
+          <div class="vision-pillar-icon">👁</div>
+          <h4 class="vision-pillar-title">SYSTEM ARCHITECTURE</h4>
+          <p class="vision-pillar-desc">
+            High-throughput enterprise backends engineered with Java 17, Spring Boot, Spring Security (JWT), and
+            normalized MySQL relational models.
+          </p>
+        </div>
+        <div class="vision-pillar-card">
+          <div class="vision-pillar-icon">✦</div>
+          <h4 class="vision-pillar-title">FULL STACK ENGINEERING</h4>
+          <p class="vision-pillar-desc">
+            End-to-end full stack execution uniting reactive frontends with structured RESTful microservices, state
+            machines, and API validation.
+          </p>
+        </div>
+        <div class="vision-pillar-card">
+          <div class="vision-pillar-icon">⊞</div>
+          <h4 class="vision-pillar-title">DIGITAL EXPERIENCE</h4>
+          <p class="vision-pillar-desc">
+            Interactive 60fps canvas renderers, hardware-accelerated video frame scrubbing, and high-precision
+            responsive ergonomics.
+          </p>
+        </div>
+        <div class="vision-pillar-card">
+          <div class="vision-pillar-icon">✺</div>
+          <h4 class="vision-pillar-title">DATA STRUCTURES & LOGIC</h4>
+          <p class="vision-pillar-desc">
+            Rigorous algorithmic foundations in C/C++ modeling process scheduling, memory hierarchies, AVL trees, and
+            graph search heuristics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FEATURED WORK (4 EDITORIAL PROJECTS) -->
+    <section class="featured-work-section" id="work">
+      <div class="section-editorial-header">
+        <span class="sec-left-label">FEATURED WORK</span>
+        <a href="project.html" class="sec-right-label">VIEW ALL PROJECTS →</a>
+      </div>
+
+      <div class="editorial-projects-grid">
+        <!-- Project 1: Online Library System -->
+        <div class="editorial-card">
+          <div class="editorial-card-inner">
+            <span class="editorial-card-badge">JAVA FULL STACK ENTERPRISE</span>
+            <h3 class="editorial-card-title">ONLINE LIBRARY SYSTEM</h3>
+            <p class="editorial-card-desc">
+              Academic library management platform powered by Java 17, Spring Boot, Spring Security, Hibernate & MySQL
+              with role-based Student & Admin portals, real-time inventory, and overdue fines.
+            </p>
+          </div>
+          <div class="editorial-card-footer">
+            <span class="editorial-card-tag">SPRING BOOT • MYSQL • JWT</span>
+            <a href="library.html" class="editorial-plus-btn" title="Launch Online Library System"
+              aria-label="Launch Online Library System">+</a>
+          </div>
+        </div>
+
+        <!-- Project 2: C++ Expense Tracker -->
+        <div class="editorial-card">
+          <div class="editorial-card-inner">
+            <span class="editorial-card-badge">DATA STRUCTURES & C++</span>
+            <h3 class="editorial-card-title">C++ DSA EXPENSE TRACKER</h3>
+            <p class="editorial-card-desc">
+              High-performance dual-layer financial intelligence engine integrating custom self-balancing AVL Trees,
+              sorting benchmarks, and interactive responsive budgeting analytics.
+            </p>
+          </div>
+          <div class="editorial-card-footer">
+            <span class="editorial-card-tag">C++ DSA • AVL TREES • WEB</span>
+            <a href="expenses.html" class="editorial-plus-btn" title="Launch Expense Tracker"
+              aria-label="Launch Expense Tracker">+</a>
+          </div>
+        </div>
+
+        <!-- Project 3: 60FPS Canvas Scrub Engine -->
+        <div class="editorial-card">
+          <div class="editorial-card-inner">
+            <span class="editorial-card-badge">INTERACTIVE WEB</span>
+            <h3 class="editorial-card-title">60FPS CANVAS SCRUB ENGINE</h3>
+            <p class="editorial-card-desc">
+              Hardware-accelerated viewport-aspect canvas scrub architecture streaming 299 preloaded frames with
+              sub-millisecond redraw, smooth lerp interpolation, and memory management.
+            </p>
+          </div>
+          <div class="editorial-card-footer">
+            <span class="editorial-card-tag">HTML5 CANVAS • 299 FRAMES</span>
+            <a href="#hero" class="editorial-plus-btn" title="Experience Canvas Engine"
+              aria-label="Experience Canvas Engine">+</a>
+          </div>
+        </div>
+
+        <!-- Project 4: CPU Scheduling Simulator -->
+        <div class="editorial-card">
+          <div class="editorial-card-inner">
+            <span class="editorial-card-badge">OPERATING SYSTEMS</span>
+            <h3 class="editorial-card-title">CPU SCHEDULING SIMULATOR</h3>
+            <p class="editorial-card-desc">
+              Interactive process scheduling software modeling Round Robin, Shortest Job First (SJF), Priority
+              Scheduling, and FCFS algorithms with turnaround analytics & visual Gantt charts.
+            </p>
+          </div>
+          <div class="editorial-card-footer">
+            <span class="editorial-card-tag">OS • PROCESS LOGIC • GANTT</span>
+            <a href="project.html" class="editorial-plus-btn" title="View in Projects"
+              aria-label="View in Projects">+</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TRUSTED STACK & ENTERPRISE TECHNOLOGIES -->
+    <section class="trusted-stack-bar">
+      <span class="trusted-stack-label">TECHNICAL EXPERTISE & ENTERPRISE STACK</span>
+      <div class="trusted-brands-row">
+        <span class="brand-item">JAVA 17</span>
+        <span class="brand-item">SPRING BOOT</span>
+        <span class="brand-item">MYSQL</span>
+        <span class="brand-item">REACT.JS</span>
+        <span class="brand-item">C / C++</span>
+        <span class="brand-item">HIBERNATE</span>
+      </div>
+    </section>
+
+    <!-- 5. ENDORSEMENT & ENGINEERING MISSION -->
+    <section class="endorsement-card">
+      <div class="endorsement-quote-col">
+        <div class="endorsement-mark">“</div>
+        <p class="endorsement-quote-text">
+          Passionate about engineering clean, maintainable, and elegant software solutions that bridge rigorous academic
+          foundations with real-world enterprise architectures. Dedicated to building software that solves problems with
+          speed, security, and impact.
+        </p>
+        <div class="endorsement-author">
+          — RUKHSAR MALADHARI, B.TECH COMPUTER SCIENCE & ENGINEERING (2025–2029)
+        </div>
+      </div>
+      <div class="endorsement-badge-col">
+        <div class="endorsement-badge-card">
+          <div class="endorsement-star">✦</div>
+          <h4 class="endorsement-inst-title">S B JAIN INSTITUTE OF TECHNOLOGY</h4>
+          <p class="endorsement-inst-sub">Management and Research, Nagpur</p>
+          <div class="endorsement-tag">AUTONOMOUS ENGINEERING • B.TECH CSE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. RESUME SECTION -->
+    <section class="resume-section" id="resume">
+      <div class="resume-header">
+        <div>
+          <span class="resume-badge">ACADEMIC & TECHNICAL RECORD</span>
+          <h3 class="resume-title">CURRICULUM VITAE</h3>
+        </div>
+        <div class="resume-actions">
+          <a href="mailto:rukhsarmaladhari30@gmail.com?subject=Resume%20Request%20-%20Rukhsar%20Maladhari"
+            class="btn-resume-download">REQUEST RESUME PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="resume-grid">
+        <!-- Block 1 -->
+        <div class="resume-block">
+          <h4 class="resume-block-title">🎓 EDUCATION & CREDENTIALS</h4>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <strong>B.Tech in Computer Science and Engineering</strong>
+              <span class="resume-year">2025 – 2029</span>
+            </div>
+            <p class="resume-item-sub">S B Jain Institute of Technology, Management and Research (Nagpur)</p>
+            <p class="resume-item-detail">Rigorous focus on Data Structures & Algorithms, Computer Architecture,
+              Operating Systems, and Scalable Backend Software Development.</p>
+          </div>
+        </div>
+
+        <!-- Block 2 -->
+        <div class="resume-block">
+          <h4 class="resume-block-title">💻 CORE ENGINEERING COURSEWORK</h4>
+          <div class="resume-course-tags">
+            <span>C Programming</span>
+            <span>C++ & STL</span>
+            <span>Data Structures & Algorithms</span>
+            <span>Computer Architecture (CAO)</span>
+            <span>Operating Systems (OS)</span>
+            <span>Database Management (DBMS)</span>
+            <span>Discrete Mathematics</span>
+            <span>Object-Oriented Programming</span>
+          </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="resume-block">
+          <h4 class="resume-block-title">⚡ FULL STACK & ENTERPRISE TOOLS</h4>
+          <p class="resume-item-detail"><strong>Languages:</strong> Java 17, C, C++17, JavaScript (ES6+), HTML5, CSS3,
+            SQL</p>
+          <p class="resume-item-detail"><strong>Frameworks & ORM:</strong> Spring Boot, Spring Security (JWT), Spring
+            Data JPA, Hibernate, React.js</p>
+          <p class="resume-item-detail"><strong>Databases & Tools:</strong> MySQL, Git, GitHub, Maven, Postman, VS Code,
+            IntelliJ IDEA</p>
+        </div>
+
+        <!-- Block 4 -->
+        <div class="resume-block">
+          <h4 class="resume-block-title">🏆 FEATURED TECHNICAL BUILDS</h4>
+          <p class="resume-item-detail"><strong>Online Library Management System:</strong> Complete Java 17 Full Stack
+            with Spring Boot REST APIs, MySQL schema, and overdue fine engine.</p>
+          <p class="resume-item-detail"><strong>C++ Algorithmic Expense Engine:</strong> Self-balancing AVL tree logic
+            with real-time financial tracking and benchmarks.</p>
+          <p class="resume-item-detail"><strong>CPU Scheduling Visualizer:</strong> Gantt chart simulation of Round
+            Robin, SJF, and Priority algorithms.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section class="editorial-contact-section" id="contact">
+      <div class="contact-left-col">
+        <span class="contact-eyebrow">GET IN TOUCH —</span>
+        <h2 class="contact-headline">LET'S CREATE<br><span class="contact-headline-italic">SOMETHING ICONIC</span></h2>
+        <p class="contact-sub">
+          Available for select software development projects, technical internships, and collaborations worldwide. Let's
+          build something extraordinary together.
+        </p>
+        <button type="button" class="btn-editorial-connect btn-open-work-modal" id="openWorkModalBtn">
+          <span>LET'S WORK TOGETHER</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <div class="contact-center-col">
+        <a href="mailto:rukhsarmaladhari30@gmail.com" class="contact-info-row">
+          <span class="contact-info-icon">✉</span>
+          <span>rukhsarmaladhari30@gmail.com</span>
+        </a>
+        <a href="tel:+919329625759" class="contact-info-row">
+          <span class="contact-info-icon">📞</span>
+          <span>+91 9329625759</span>
+        </a>
+        <div class="contact-info-row">
+          <span class="contact-info-icon">📍</span>
+          <span>Nagpur, Maharashtra, India</span>
+        </div>
+        <div class="contact-info-row">
+          <span class="contact-info-icon">🌐</span>
+          <span>Remote & Hybrid Open</span>
+        </div>
+      </div>
+
+      <div class="contact-right-col">
+        <div class="contact-business-badge">
+          <div class="badge-emblem">✦</div>
+          <div class="badge-name">RUKHSAR MALADHARI</div>
+          <div class="badge-role">SOFTWARE DEVELOPER</div>
+          <div class="badge-line"></div>
+          <div class="badge-sub">B.TECH CSE • FULL STACK ARCHITECTURE</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Editorial Footer -->
+  <footer class="editorial-footer">
+    <div class="footer-copy">© 2026 RUKHSAR MALADHARI. ALL RIGHTS RESERVED.</div>
+    <div class="footer-links">
+      <a href="#hero">HOME</a>
+      <a href="#about">VISION</a>
+      <a href="#work">PROJECTS</a>
+      <a href="#resume">RESUME</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+    <div class="footer-tagline">DESIGNING PURPOSE. BUILDING LEGACY.</div>
+  </footer>
+
+  <!-- MODAL FORM: LET'S WORK TOGETHER -->
+  <div class="form-modal-backdrop" id="workModalBackdrop" role="dialog" aria-modal="true"
+    aria-labelledby="formModalTitle">
+    <div class="form-modal-card">
+      <button type="button" class="form-close-btn" id="closeFormModal" aria-label="Close modal">✕</button>
+
+      <div class="form-title-group">
+        <span class="form-eyebrow">START A COLLABORATION</span>
+        <h3 class="form-title" id="formModalTitle">Let's Work Together</h3>
+        <p class="form-desc">
+          Fill out your details below and Rukhsar will get back to you shortly.
+        </p>
+      </div>
+
+      <form id="workTogetherForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="clientName">Full Name *</label>
+          <input type="text" id="clientName" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required
+            autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientPhone">Mobile No. *</label>
+          <input type="tel" id="clientPhone" name="phone" class="form-input" placeholder="e.g. +91 9329625759" required
+            autocomplete="tel" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientEmail">Email Address *</label>
+          <input type="email" id="clientEmail" name="email" class="form-input" placeholder="e.g. rahul@example.com"
+            required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientMessage">Project Details / Message</label>
+          <textarea id="clientMessage" name="message" class="form-textarea" rows="3"
+            placeholder="Briefly describe what you'd like to work on together..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit-btn">
+          <span>SEND INQUIRY</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <div class="form-success-banner" id="formSuccessBanner">
+        <div style="font-size: 1.6rem; color: var(--gold-primary); margin-bottom: 6px;">✓</div>
+        <strong style="color: #fff; font-size: 1rem; display: block; margin-bottom: 4px;">Inquiry Prepared!</strong>
+        Thank you for reaching out. Opening your email app to send your details directly to
+        <strong>rukhsarmaladhari30@gmail.com</strong>...
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // THEME TOGGLE ENGINE
+    // ============================================
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeToggleIcon = themeToggleBtn ? themeToggleBtn.querySelector('.theme-toggle-icon') : null;
+
+    // Check saved theme or default to 'dark' (luxury emerald noir)
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        if (themeToggleIcon) themeToggleIcon.textContent = '🌙';
+        if (themeToggleBtn) themeToggleBtn.setAttribute('title', 'Switch to Dark Mode');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        if (themeToggleIcon) themeToggleIcon.textContent = '☀️';
+        if (themeToggleBtn) themeToggleBtn.setAttribute('title', 'Switch to Light Mode');
+      }
+      localStorage.setItem('portfolio-theme', theme);
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        applyTheme(isLight ? 'dark' : 'light');
+      });
+    }
+
+    // ============================================
+    // CUSTOM SPARKLE CURSOR ENGINE
+    // ============================================
+    (function initSparkleCursor() {
+      const canvas = document.getElementById('sparkle-cursor-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const sparkles = [];
+      let mouseX = -100;
+      let mouseY = -100;
+      let lastSpawnX = -100;
+      let lastSpawnY = -100;
+      let isVisible = false;
+
+      function getSparklePalette() {
+        return ['#ffffff', '#f4e4ba', '#d4af37', '#e5b399', '#fef08a'];
+      }
+
+      function drawShimmerStar(ctx, cx, cy, spikes, outerRadius, innerRadius, color, alpha, rotation) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(cx, cy);
+        ctx.rotate(rotation);
+        let rot = (Math.PI / 2) * 3;
+        let x = 0;
+        let y = 0;
+        const step = Math.PI / spikes;
+
+        ctx.moveTo(0, 0 - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+          x = Math.cos(rot) * outerRadius;
+          y = Math.sin(rot) * outerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+
+          x = Math.cos(rot) * innerRadius;
+          y = Math.sin(rot) * innerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+        }
+        ctx.lineTo(0, 0 - outerRadius);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = color;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      class SparkleParticle {
+        constructor(x, y, isBurst = false) {
+          this.x = x;
+          this.y = y;
+          const palette = getSparklePalette();
+          this.color = palette[Math.floor(Math.random() * palette.length)];
+          this.size = isBurst ? (Math.random() * 8 + 5) : (Math.random() * 5 + 3.5);
+          this.spikes = 4;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = (Math.random() - 0.5) * 0.16;
+          const speed = isBurst ? (Math.random() * 3.5 + 1.2) : (Math.random() * 1.4 + 0.3);
+          const angle = isBurst ? (Math.random() * Math.PI * 2) : (Math.random() * Math.PI * 2);
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed - (isBurst ? 0.6 : 0.4);
+          this.alpha = 1;
+          this.decay = isBurst ? (Math.random() * 0.02 + 0.015) : (Math.random() * 0.025 + 0.022);
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rotation += this.rotationSpeed;
+          this.alpha -= this.decay;
+          this.size *= 0.965;
+        }
+
+        draw(ctx) {
+          if (this.alpha <= 0 || this.size <= 0.6) return;
+          drawShimmerStar(ctx, this.x, this.y, this.spikes, this.size, this.size * 0.35, this.color, this.alpha, this.rotation);
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        isVisible = true;
+
+        const dist = Math.hypot(mouseX - lastSpawnX, mouseY - lastSpawnY);
+        if (dist > 7) {
+          const count = dist > 25 ? 2 : 1;
+          for (let i = 0; i < count; i++) {
+            sparkles.push(new SparkleParticle(
+              mouseX + (Math.random() - 0.5) * 6,
+              mouseY + (Math.random() - 0.5) * 6
+            ));
+          }
+          lastSpawnX = mouseX;
+          lastSpawnY = mouseY;
+        }
+      });
+
+      window.addEventListener('mouseleave', () => {
+        isVisible = false;
+      });
+
+      window.addEventListener('click', (e) => {
+        const count = 12;
+        for (let i = 0; i < count; i++) {
+          sparkles.push(new SparkleParticle(e.clientX, e.clientY, true));
+        }
+      });
+
+      function renderSparkles() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Subtle glowing cursor follower dot
+        if (isVisible && mouseX > 0 && mouseY > 0) {
+          const palette = getSparklePalette();
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(mouseX, mouseY, 3.2, 0, Math.PI * 2);
+          ctx.fillStyle = palette[0];
+          ctx.globalAlpha = 0.85;
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = palette[2] || palette[0];
+          ctx.fill();
+          ctx.restore();
+        }
+
+        for (let i = sparkles.length - 1; i >= 0; i--) {
+          const sp = sparkles[i];
+          sp.update();
+          sp.draw(ctx);
+          if (sp.alpha <= 0 || sp.size <= 0.6) {
+            sparkles.splice(i, 1);
+          }
+        }
+
+        if (sparkles.length > 90) {
+          sparkles.splice(0, sparkles.length - 90);
+        }
+
+        requestAnimationFrame(renderSparkles);
+      }
+      requestAnimationFrame(renderSparkles);
+    })();
+
+    // ============================================
+    // MODAL FORM: LET'S WORK TOGETHER
+    // ============================================
+    const workModalBackdrop = document.getElementById('workModalBackdrop');
+    const openFormButtons = document.querySelectorAll('.btn-open-work-modal');
+    const closeFormModalBtn = document.getElementById('closeFormModal');
+    const workTogetherForm = document.getElementById('workTogetherForm');
+    const formSuccessBanner = document.getElementById('formSuccessBanner');
+
+    function openWorkModal() {
+      workModalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      const nameInput = document.getElementById('clientName');
+      if (nameInput) setTimeout(() => nameInput.focus(), 150);
+    }
+
+    function closeWorkModal() {
+      workModalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        workTogetherForm.style.display = 'block';
+        formSuccessBanner.style.display = 'none';
+      }, 350);
+    }
+
+    openFormButtons.forEach(btn => {
+      btn.addEventListener('click', openWorkModal);
+    });
+
+    if (closeFormModalBtn) {
+      closeFormModalBtn.addEventListener('click', closeWorkModal);
+    }
+
+    workModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === workModalBackdrop) {
+        closeWorkModal();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && workModalBackdrop.classList.contains('active')) {
+        closeWorkModal();
+      }
+    });
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('clientName').value.trim();
+      const phone = document.getElementById('clientPhone').value.trim();
+      const email = document.getElementById('clientEmail').value.trim();
+      const message = document.getElementById('clientMessage').value.trim();
+
+      if (!name || !phone || !email) {
+        alert('Please fill out all required fields: Name, Mobile No, and Email.');
+        return;
+      }
+
+      workTogetherForm.style.display = 'none';
+      formSuccessBanner.style.display = 'block';
+
+      const subject = encodeURIComponent(`Project Collaboration Inquiry from ${name}`);
+      const bodyText = `Full Name: ${name}\nMobile No: ${phone}\nEmail: ${email}\n\nProject Details:\n${message || 'No additional note provided.'}`;
+      const mailtoLink = `mailto:rukhsarmaladhari30@gmail.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+      }, 800);
+    }
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
+      const loader = document.getElementById('loader');
+      if (loader) loader.style.width = progress + '%';
+    });
+  </script>
+</body>
+
+</html>

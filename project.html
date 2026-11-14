@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Rukhsar Maladhari | Software Developer</title>
+
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #0a0406;
+      --burgundy: #4a0d18;
+      --burgundy-glow: rgba(142, 27, 47, 0.45);
+      --champagne: #f4d3bf;
+      --rose-gold: #e5b399;
+      --accent-gold: #df9f7d;
+      --glass-panel: rgba(22, 6, 10, 0.78);
+      --glass-border: rgba(244, 211, 191, 0.18);
+      --text-white: #ffffff;
+      --text-light: #fbeee6;
+      --text-muted: #c4a89d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at 80% 10%, rgba(120, 18, 36, 0.35) 0%, rgba(10, 4, 6, 0.95) 60%, #060204 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient luxury glow overlay */
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 27, 47, 0.25) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 13, 24, 0.3) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Sticky Navigation */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(12, 4, 7, 0.75);
+      border-bottom: 1px solid rgba(244, 211, 191, 0.12);
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.22em;
+      color: var(--champagne);
+      text-decoration: none;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-sub {
+      font-size: 0.52rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--champagne);
+    }
+
+    .btn-talk {
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      text-decoration: none;
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: rgba(244, 211, 191, 0.06);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-talk:hover {
+      background: rgba(142, 27, 47, 0.35);
+      border-color: var(--rose-gold);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 5vw 120px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 60px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.76rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .page-title span {
+      background: linear-gradient(135deg, #fbeee6 0%, #e5b399 50%, #c48b72 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+
+    .tab-btn {
+      background: rgba(22, 6, 10, 0.7);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: linear-gradient(135deg, #f4d3bf 0%, #e5b399 100%);
+      color: #120407;
+      border-color: var(--rose-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(229, 179, 153, 0.3);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--glass-panel);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.35s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--rose-gold);
+      transform: translateY(-6px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(142, 27, 47, 0.25);
+    }
+
+    .project-preview {
+      width: 100%;
+      height: 240px;
+      background: rgba(14, 4, 8, 0.9);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: brightness(0.9);
+    }
+
+    .project-card:hover .project-preview img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    .project-preview-placeholder {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.2em;
+      color: rgba(244, 211, 191, 0.25);
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #120407;
+      background: linear-gradient(135deg, #f4d3bf 0%, #e5b399 100%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-content {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .project-top-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .project-cat {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .project-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tech-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--champagne);
+      background: rgba(244, 211, 191, 0.08);
+      border: 1px solid rgba(244, 211, 191, 0.15);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid rgba(244, 211, 191, 0.1);
+    }
+
+    .project-link {
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    .project-code-link {
+      font-size: 0.76rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .project-code-link:hover {
+      color: var(--champagne);
+    }
+
+    /* Bottom CTA Card */
+    .projects-cta {
+      margin-top: 100px;
+      background: linear-gradient(135deg, rgba(85, 14, 28, 0.85) 0%, rgba(35, 6, 12, 0.95) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 60px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+    }
+
+    .projects-cta h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .projects-cta p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      max-width: 580px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .btn-primary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #120407;
+      background: linear-gradient(135deg, #f4d3bf 0%, #e5b399 100%);
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(229, 179, 153, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(229, 179, 153, 0.4);
+      background: #ffffff;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid rgba(244, 211, 191, 0.1);
+      background: rgba(8, 2, 4, 0.85);
+      padding: 30px 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      z-index: 10;
+      position: relative;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--champagne);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .site-footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Top Sticky Navigation -->
+  <header class="nav-bar">
+    <a href="index.html#hero" class="brand-logo">
+      <span>RUKHSAR</span>
+      <span class="brand-sub">SOFTWARE DEVELOPER</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#hero" class="nav-link">HOME</a>
+      <a href="index.html#about" class="nav-link">ABOUT</a>
+      <a href="project.html" class="nav-link active">PROJECTS</a>
+      <a href="index.html#resume" class="nav-link">RESUME</a>
+      <a href="index.html#contact" class="nav-link">CONTACT</a>
+    </nav>
+    <a href="index.html#contact" class="btn-talk">
+      <span>LET'S CONNECT</span>
+      <span>→</span>
+    </a>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Header -->
+    <header class="page-header">
+      <span class="section-eyebrow">PORTFOLIO & ENGINEERING</span>
+      <h1 class="page-title">Curated <span>Projects</span></h1>
+      <p class="page-desc">
+        A collection of software engineering solutions, interactive web architectures, and algorithmic implementations crafted by <strong>Rukhsar Maladhari</strong>.
+      </p>
+    </header>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="tab-btn active" data-filter="all">All Projects</button>
+      <button class="tab-btn" data-filter="java">Java Full Stack</button>
+      <button class="tab-btn" data-filter="web">Web Development</button>
+      <button class="tab-btn" data-filter="dsa">DSA & C++</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+
+      <!-- Project: Online Library Management System (Java Full Stack) -->
+      <article class="project-card" data-category="java web">
+        <div class="project-preview">
+          <span class="project-badge" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #fff;">JAVA FULL STACK</span>
+          <img src="book_cover_vintage_classics.jpg" alt="Online Library Management System" onerror="this.src='frames/book_cover_vintage_classics.jpg'" />
+        </div>
+        <div class="project-content">
+          <div class="project-top-meta">
+            <span class="project-cat" style="color: #38bdf8;">Enterprise Java & Spring Boot Architecture</span>
+            <h2 class="project-title">Online Library Management System</h2>
+            <p class="project-desc">
+              Full-stack enterprise library platform engineered with Java 17, Spring Boot, Spring Security (Role-Based Access Control for Student and Admin), Spring Data JPA/Hibernate, and MySQL. Features real-time book catalog search, automated 14-day loan lifecycle, late fine calculations (₹5/day), reservation queues, and interactive analytics dashboard.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">Java 17 LTS</span>
+              <span class="tech-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">Spring Boot 3.2</span>
+              <span class="tech-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">Spring Security & JWT</span>
+              <span class="tech-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">Spring Data JPA</span>
+              <span class="tech-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">MySQL 8+</span>
+              <span class="tech-tag">React / Modern Web UI</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="library.html" class="project-link" style="color: #38bdf8;">
+              <span>LAUNCH LIBRARY APP</span>
+              <span>→</span>
+            </a>
+            <a href="backend/README.md" target="_blank" class="project-code-link" style="color: #94a3b8;">
+              <span>Spring Boot Docs & DB</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project: Personal Expense Tracker (C++ DSA & Modern Web) -->
+      <article class="project-card" data-category="dsa web">
+        <div class="project-preview">
+          <span class="project-badge" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff;">C++ DSA + WEB APP</span>
+          <span class="project-preview-placeholder" style="color: rgba(52, 211, 153, 0.45);">EXPENSES</span>
+        </div>
+        <div class="project-content">
+          <div class="project-top-meta">
+            <span class="project-cat" style="color: #34d399;">C++ Data Structures & Finance Dashboard</span>
+            <h2 class="project-title">Personal Expense Tracker</h2>
+            <p class="project-desc">
+              Full-featured finance dashboard powered by a C++ DSA core engine (Vectors for transaction storage, Hash Map for O(1) category indexing, and MergeSort/QuickSort algorithms) with modern navy & soft green web dashboard.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">C++17 Engine</span>
+              <span class="tech-tag" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">Vector Storage</span>
+              <span class="tech-tag" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">Hash Map O(1)</span>
+              <span class="tech-tag" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">MergeSort & QuickSort</span>
+              <span class="tech-tag">Interactive Charts</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="expenses.html" class="project-link" style="color: #34d399;">
+              <span>LAUNCH DASHBOARD</span>
+              <span>→</span>
+            </a>
+            <a href="expense_tracker.cpp" download="expense_tracker.cpp" class="project-code-link" style="color: #94a3b8;">
+              <span>Download .cpp</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 0: Brew & Co. Cafe Website -->
+      <article class="project-card" data-category="web">
+        <div class="project-preview">
+          <span class="project-badge" style="background: linear-gradient(135deg, #e6a15c 0%, #c87d4a 100%);">LIVE CAFE SITE</span>
+          <img src="cafe_brew_bar.jpg" alt="Brew & Co. Artisanal Cafe Website" onerror="this.src='frames/cafe_brew_bar.jpg'" />
+        </div>
+        <div class="project-content">
+          <div class="project-top-meta">
+            <span class="project-cat">Web Development Project</span>
+            <h2 class="project-title">Brew & Co. Artisanal Cafe</h2>
+            <p class="project-desc">
+              Full-featured cafe & roastery web experience with Home, About Us heritage story, interactive categorized Menu with pricing, aesthetic botanical gallery, and online Table Reservation system.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">HTML5 / Semantic</span>
+              <span class="tech-tag">CSS3 Modern Layouts</span>
+              <span class="tech-tag">JavaScript ES6+</span>
+              <span class="tech-tag">Interactive Menu Filter</span>
+              <span class="tech-tag">Online Table Booking</span>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="cafe.html" class="project-link" style="color: var(--amber-warm);">
+              <span>EXPLORE CAFE WEBSITE</span>
+              <span>→</span>
+            </a>
+            <span class="project-code-link">☕ Web App</span>
+          </div>
+        </div>
+      </article>
+
+
+
+
+    </div>
+
+    <!-- Call to action block -->
+    <section class="projects-cta">
+      <h3>Have a project in mind?</h3>
+      <p>
+        I'm actively seeking opportunities to build impactful software, collaborate on open source, or engineer scalable web applications.
+      </p>
+      <a href="index.html#contact" class="btn-primary-pill">
+        <span>START A COLLABORATION</span>
+        <span>→</span>
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div>
+      <strong style="color: var(--champagne); letter-spacing: 0.2em;">RUKHSAR MALADHARI</strong> • SOFTWARE DEVELOPER
+    </div>
+    <div>
+      © 2026 Rukhsar Maladhari. All rights reserved.
+    </div>
+    <div class="footer-links">
+      <a href="index.html#hero">HOME</a>
+      <a href="index.html#about">ABOUT</a>
+      <a href="project.html">PROJECTS</a>
+      <a href="index.html#resume">RESUME</a>
+      <a href="index.html#contact">CONTACT</a>
+    </div>
+  </footer>
+
+  <script>
+    // Project Category Filter Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          if (filter === 'all' || category.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

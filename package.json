@@ -1,0 +1,13 @@
+{
+  "name": "ruk-portfolio",
+  "version": "1.0.0",
+  "description": "Interactive sunset beach scroll animation portfolio for Ruk",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["portfolio", "canvas", "animation", "scroll-sequence"],
+  "author": "Ruk",
+  "license": "ISC"
+}
+
