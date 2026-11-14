@@ -214,6 +214,24 @@
       color: var(--gold-primary);
       text-decoration: none;
       font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-block;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .editorial-top-brand:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+    }
+
+    .editorial-top-brand.golden-blowup {
+      animation: goldenTopBrandBlast 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes goldenTopBrandBlast {
+      0% { transform: scale(1); filter: drop-shadow(0 0 6px #ffd700); }
+      25% { transform: scale(1.24); filter: drop-shadow(0 0 30px #ffffff) drop-shadow(0 0 60px #ffd700) brightness(2.4); color: #ffffff; }
+      100% { transform: scale(1); filter: none; color: var(--gold-primary); }
     }
 
     .editorial-top-role {
@@ -504,12 +522,64 @@
 
     .hero-cursive-name {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-size: clamp(2.6rem, 4.2vw, 3.8rem);
       color: var(--gold-light);
       line-height: 1.1;
       margin-top: 4px;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
       letter-spacing: 0.04em;
+      cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.35s ease;
+      user-select: none;
+    }
+
+    .hero-cursive-name:hover {
+      transform: scale(1.08) rotate(-1.5deg);
+      filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 35px rgba(229, 179, 153, 0.75));
+    }
+
+    .hero-cursive-sparkle {
+      font-size: 1rem;
+      color: var(--gold-primary);
+      opacity: 0.85;
+      animation: sparkleGlint 2s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    @keyframes sparkleGlint {
+      0%, 100% { transform: scale(0.9) rotate(0deg); opacity: 0.6; }
+      50% { transform: scale(1.3) rotate(90deg); opacity: 1; filter: drop-shadow(0 0 8px #ffd700); }
+    }
+
+    /* Golden Blowup scene on Rukhsar Maladhari */
+    .hero-cursive-name.golden-blowup {
+      animation: goldenCursiveBlast 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes goldenCursiveBlast {
+      0% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 10px #df9f7d);
+      }
+      22% {
+        transform: scale(1.32) rotate(-2.5deg);
+        filter: drop-shadow(0 0 45px #ffffff) drop-shadow(0 0 90px #ffd700) drop-shadow(0 0 130px #e5b399) brightness(2.6);
+        color: #ffffff;
+      }
+      50% {
+        transform: scale(1.15) rotate(-1deg);
+        filter: drop-shadow(0 0 35px #ffd700) drop-shadow(0 0 65px #df9f7d) brightness(1.8);
+        color: var(--gold-light);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.9));
+        color: var(--gold-light);
+      }
     }
 
     [data-theme="light"] .hero-cursive-name {
@@ -1611,7 +1681,7 @@
   <!-- Editorial Top Bar with Home, About, Project, Contact Navigation -->
   <header class="editorial-top-bar">
     <div class="editorial-top-left">
-      <a href="#hero" class="editorial-top-brand">RUKHSAR MALADHARI</a>
+      <a href="#hero" class="editorial-top-brand" id="editorialTopBrand" title="Click to blow up Rukhsar Maladhari in golden light!">RUKHSAR MALADHARI</a>
       <span>•</span>
       <span class="editorial-top-role">SOFTWARE DEVELOPER</span>
     </div>
@@ -1656,7 +1726,10 @@
           <span>AVAILABLE FOR PROJECTS</span>
           <span>✦</span>
         </button>
-        <div class="hero-cursive-name">Rukhsar Maladhari</div>
+        <div class="hero-cursive-name" id="heroCursiveName" title="Click to blow up Rukhsar Maladhari in golden light!">
+          <span>Rukhsar Maladhari</span>
+          <span class="hero-cursive-sparkle" title="Click to blow up!">✦</span>
+        </div>
       </div>
 
       <!-- Right Flank -->
@@ -2238,45 +2311,62 @@
         }
       }
 
-      // Interactive Click on PORTFOLIO Title -> Blow up in Golden Light
+      // Generic Spectacular Golden Blowup Scene Generator
+      function triggerGoldenExplosion(element, blastCount = 160) {
+        if (!element) return;
+        // Restart golden bloom animation on element
+        element.classList.remove('golden-blowup');
+        void element.offsetWidth; // force DOM reflow
+        element.classList.add('golden-blowup');
+
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Expanding Golden Shockwave Halo Ring
+        const ring = document.createElement('div');
+        ring.className = 'golden-shockwave-ring';
+        ring.style.left = centerX + 'px';
+        ring.style.top = centerY + 'px';
+        document.body.appendChild(ring);
+        setTimeout(() => ring.remove(), 950);
+
+        // Spawn Golden Firework & Sparkler Particles with Physics
+        const goldPalette = ['#ffffff', '#fff9e6', '#ffd700', '#fce8a6', '#f4d3bf', '#e5b399', '#df9f7d', '#d4af37', '#fff0bb', '#ffe066'];
+
+        for (let i = 0; i < blastCount; i++) {
+          const spawnX = rect.left + Math.random() * rect.width;
+          const spawnY = rect.top + Math.random() * rect.height;
+
+          const angleFromCenter = Math.atan2(spawnY - centerY, spawnX - centerX);
+          const spreadAngle = angleFromCenter + (Math.random() - 0.5) * 1.35;
+          const speed = Math.random() * 9 + 4.5;
+          const vx = Math.cos(spreadAngle) * speed;
+          const vy = Math.sin(spreadAngle) * speed - Math.random() * 4.5;
+          const size = Math.random() * 12 + 4.5;
+          const color = goldPalette[Math.floor(Math.random() * goldPalette.length)];
+
+          sparkles.push(new GoldenBlastParticle(spawnX, spawnY, vx, vy, size, color, Math.random() > 0.22));
+        }
+      }
+
+      // 1. Interactive Click on PORTFOLIO Title -> Blow up in Golden Light
       const portfolioTitle = document.getElementById('portfolioTitle');
       if (portfolioTitle) {
-        portfolioTitle.addEventListener('click', (e) => {
-          // Restart golden bloom animation on letters
-          portfolioTitle.classList.remove('golden-blowup');
-          void portfolioTitle.offsetWidth; // force DOM reflow
-          portfolioTitle.classList.add('golden-blowup');
+        portfolioTitle.addEventListener('click', () => triggerGoldenExplosion(portfolioTitle, 160));
+      }
 
-          const rect = portfolioTitle.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
+      // 2. Interactive Click on "Rukhsar Maladhari" (Hero Cursive Signature) -> Blown up Scene
+      const heroCursiveName = document.getElementById('heroCursiveName');
+      if (heroCursiveName) {
+        heroCursiveName.addEventListener('click', () => triggerGoldenExplosion(heroCursiveName, 180));
+      }
 
-          // Expanding Golden Shockwave Halo Ring
-          const ring = document.createElement('div');
-          ring.className = 'golden-shockwave-ring';
-          ring.style.left = centerX + 'px';
-          ring.style.top = centerY + 'px';
-          document.body.appendChild(ring);
-          setTimeout(() => ring.remove(), 900);
-
-          // Spawn 150 Golden Firework & Sparkler Particles
-          const goldPalette = ['#ffffff', '#fff9e6', '#ffd700', '#fce8a6', '#f4d3bf', '#e5b399', '#df9f7d', '#d4af37', '#fff0bb'];
-          const blastCount = 150;
-
-          for (let i = 0; i < blastCount; i++) {
-            const spawnX = rect.left + Math.random() * rect.width;
-            const spawnY = rect.top + Math.random() * rect.height;
-
-            const angleFromCenter = Math.atan2(spawnY - centerY, spawnX - centerX);
-            const spreadAngle = angleFromCenter + (Math.random() - 0.5) * 1.1;
-            const speed = Math.random() * 8.5 + 4;
-            const vx = Math.cos(spreadAngle) * speed;
-            const vy = Math.sin(spreadAngle) * speed - Math.random() * 4;
-            const size = Math.random() * 11 + 4.5;
-            const color = goldPalette[Math.floor(Math.random() * goldPalette.length)];
-
-            sparkles.push(new GoldenBlastParticle(spawnX, spawnY, vx, vy, size, color, Math.random() > 0.25));
-          }
+      // 3. Interactive Click on "RUKHSAR MALADHARI" in Top Bar -> Blown up Scene
+      const editorialTopBrand = document.getElementById('editorialTopBrand');
+      if (editorialTopBrand) {
+        editorialTopBrand.addEventListener('click', (e) => {
+          triggerGoldenExplosion(editorialTopBrand, 140);
         });
       }
 
